@@ -1,0 +1,73 @@
+a {cursor: pointer;}
+
+.notifications {
+    position: fixed;
+    background: transparent;
+    z-index: 99999;
+    right: 20px;
+    top: 20px;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+#waitFunction {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 300px;
+    padding: 15px;
+    border-radius: 3px;
+    /*background: #FFFC91;*/
+    /*border: 1px solid #ECEA87;*/
+    background: #444;
+    color:#fff;
+    z-index: 99999999;
+    text-align: center;
+    display: none;
+}
+/* START alert notification */
+.alert {
+    width: 450px;
+    margin-bottom: 20px;
+    white-space: normal;
+}
+.alert-danger {
+    background-color: #CC4441;
+    border-color: #a94442;
+    color: #fff;
+}
+.alert-success {
+    background-color: #4AA74B;
+    border-color: #369038;
+    color: #fff;
+}
+.alert-warning {
+    background-color: #E0A839;
+    border-color: #C39230;
+    color: #fff;
+}
+.alert-info {
+    background-color: #49ADDE;
+    border-color: #368EB9;
+    color: #fff;
+}
+.alert:before {
+    margin-right:10px;
+    font-family: 'FontAwesome';
+}
+.alert-danger:before {
+    content: "\f05e";
+}
+.alert-success:before {
+    content: "\f00c";
+}
+.alert-warning:before {
+    content: "\f071";
+}
+.alert-info:before {
+    content: "\f05a";
+}
+/* END alert notification */
