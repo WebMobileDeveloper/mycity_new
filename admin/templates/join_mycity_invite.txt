@@ -1,0 +1,9 @@
+<p>Hi {receipent},</p>  
+
+<p>I am {sender}. I'd like to connect with you on Mycity. This will make it easier to stay in touch.
+</p>
+
+<p>
+Best regards,<br/>
+{sender}
+</p>

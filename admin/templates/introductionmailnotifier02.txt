@@ -1,0 +1,101 @@
+<!DOCTYPE html><html>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+    <title>Email from mycity.com</title>
+    <style type='text/css'>
+        body {margin: 10px 0; padding: 0 10px; background: #f3f3f3; font-size: 14px;}
+        table {border-collapse: collapse;}
+        td {font-family: arial, sans-serif; color: #333333;}
+
+        @media only screen and (max-width: 480px) {
+            body,table,td,p,a,li,blockquote {
+                -webkit-text-size-adjust:none !important;
+            }
+            table {width: 100% !important;}
+
+            .responsive-image img {
+                height: auto !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<table border='0' cellpadding='0' cellspacing='0' width='100%'>
+    <tr>
+        <td>
+            <table border='0' cellpadding='0' cellspacing='0' align='center' width='640' bgcolor='#FFFFFF' style='color: #333333'>
+                <tr>
+                    <td bgcolor='#333333' style='font-size: 30px; color:#fff; padding: 0 10px;border-bottom:10px solid #78b0d1;' height='100' align='center'>
+                        <a href='http://www.mycity.com' target='_blank'>
+                            <img src='http://www.mycity.com/images/logo.png' width='100' alt='www.mycity.com' />
+                        </a>
+                    </td>
+                </tr>
+                <tr><td style='font-size: 0; line-height: 0;' height='30'>&nbsp;</td></tr>
+                <tr>
+                    <td style='padding: 10px 10px 30px 10px;'>
+                        <div style='font-size: 16px;'> 
+						 
+		 <p>Hello {partner},</p>
+		<p>A friend of yours recently gave you high ratings on the following questions:<br/>
+			1 Do you want to grow your business?<br/>
+			2 Are you willing to network?<br/>
+			3 Are you willing to give referrals?<br/>
+			4 What is your expertise in your field?<br/>
+			</p>
+		<p>
+		They also mentioned that you are interested in meeting someone in the following vocation.
+		</p>
+		<div style='margin-bottom: 20px;
+			background-color: #fff;
+			border: 1px solid #efefef;padding:10px;
+			border-radius: 4px; '>  
+						<p><strong>Name:</strong> {receipentname}</p>
+							<p><strong>Profession:</strong> {receipentprof}</p>
+						<p><strong>Email:</strong> {to}</p>
+						<p><strong>Phone:</strong> {receipentphone}</p>
+		
+		</div>
+		
+		<p>We matched an individual also with high ratings through your friend's partner network.<br/>";
+
+        /* If you are interested in this potential client or referral introduction, please respond with a yes
+        and your friend will create the introduction.<br/> */
+        $html  .="<br/>
+        Sincerely,<br/>
+        Referrals@mycity.com<br/>
+        </p>
+        <p>
+        If you would like more information,<br/>
+        please email or call<br/>
+        310-736-5787<br/>
+        <a href=\'mailto:bob@mycity.com\' target=\'_blank\'>bob@mycity.com</a></p>
+		
+					</div>
+                    </td>
+                </tr>
+                <tr>
+                <td style='padding: 0 10px 10px 10px;'>If you are not the intended person or did not make this request, delete this email please.</td>
+                </tr>
+                <tr><td style='font-size: 0; line-height: 0;' height='1' bgcolor='#eeeeee'>&nbsp;</td></tr>
+                <tr><td style='font-size: 0; line-height: 0;' height='40'>&nbsp;</td></tr>
+                <tr>
+                    <td bgcolor='#333333' style='border-top:4px solid #78b0d1;'>
+                        <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                            <tr><td style='font-size: 0; line-height: 0;' height='20'>&nbsp;</td></tr>
+                            <tr>
+                                <td style='padding: 0 10px; color: #cccccc;' align='center'>
+                                    Copyright &copy; " . date('Y') . " | All Rights Reserved.
+                                </td>
+                            </tr>
+                            <tr><td style='font-size: 0; line-height: 0;' height='20'>&nbsp;</td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table></body></html>

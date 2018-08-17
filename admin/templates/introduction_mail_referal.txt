@@ -1,0 +1,23 @@
+<p>Hi {receipent},</p>
+<p>You may or may not know that I am a member of a terrific referral organization called mycity.com. 
+The purpose of mycity.com is to make the best referral introductions possible. We do this by maintaining a rating system.
+</p>
+<p>
+One of my networking partners, {rated_by}, recently rated a {introducee_profession} as a professional who is interested in growing their business through networking. 
+I thought you would appreciate an introduction and could potentially find a way to do business together.
+</p>
+<p>
+Please reach out to:<br/>
+<strong>{introducee}</strong>,<br/>
+{introducee_profession}<br/>
+{introducee_phone} Mobile<br/>
+{introducee_email} Email<br/>
+</p>
+<p>When you connect with {introducee}, please remember to tell him that {rated_by} and I sent you and we look forward to speaking with him again soon.</p>
+<p>If you would like more information about this referral or mycity.com, call me at {sender_phone}.</p>
+<p>
+Sincerely, <br />
+{user}<br/>
+{user_email}<br/> 
+{sender_phone}<br/>
+</p>

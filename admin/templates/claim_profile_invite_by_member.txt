@@ -1,0 +1,14 @@
+<p>Hello {receipent},</p> 
+
+<p>A member of mycity.com is waiting to connect with you. Join mycity.com to connect and grow.</p>
+ 
+<p>
+Click <a target='blank' href='https://mycity.com/claimprofile.php?token={tokenid}&l={tokenlength}&hval={tokenlengthhash}'>here</a> to join.
+</p>
+
+<p>
+Any questions, please contact me.</p>
+<p>Bob Friedenthal<br />   
+<a href='mailto:bob@mycity.com' target='_blank'>bob@mycity.com</a><br/>
+310-736-5787 Mobile<br />
+</p> 

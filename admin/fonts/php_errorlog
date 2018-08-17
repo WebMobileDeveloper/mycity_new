@@ -1,0 +1,14 @@
+[05-May-2018 11:47:20 CST6CDT] PHP Warning:  Unexpected character in input:  '' (ASCII=30) state=0 in /home/mycity29/public_html/fonts/Montserrat-Regular.otf on line 288
+[05-May-2018 11:47:20 CST6CDT] PHP Warning:  Unexpected character in input:  '' (ASCII=19) state=0 in /home/mycity29/public_html/fonts/Montserrat-Regular.otf on line 288
+[05-May-2018 11:47:20 CST6CDT] PHP Parse error:  syntax error, unexpected 'ß€Õ½ÇÕ' (T_STRING) in /home/mycity29/public_html/fonts/Montserrat-Regular.otf on line 288
+[05-May-2018 11:47:20 CST6CDT] PHP Warning:  Unexpected character in input:  ' in /home/mycity29/public_html/fonts/Montserrat-Regular.ttf on line 81
+[05-May-2018 11:47:20 CST6CDT] PHP Warning:  Unexpected character in input:  '' (ASCII=1) state=0 in /home/mycity29/public_html/fonts/Montserrat-Regular.ttf on line 81
+[05-May-2018 11:47:20 CST6CDT] PHP Warning:  Unexpected character in input:  ' in /home/mycity29/public_html/fonts/Montserrat-Regular.ttf on line 81
+[05-May-2018 11:47:20 CST6CDT] PHP Warning:  Unexpected character in input:  '' (ASCII=2) state=0 in /home/mycity29/public_html/fonts/Montserrat-Regular.ttf on line 81
+[05-May-2018 11:47:20 CST6CDT] PHP Parse error:  syntax error, unexpected 'æ' (T_STRING) in /home/mycity29/public_html/fonts/Montserrat-Regular.ttf on line 81
+[05-May-2018 11:47:21 CST6CDT] PHP Warning:  Unexpected character in input:  '' (ASCII=24) state=0 in /home/mycity29/public_html/fonts/fontawesome-webfont.woff2 on line 519
+[05-May-2018 11:47:21 CST6CDT] PHP Parse error:  syntax error, unexpected '{' in /home/mycity29/public_html/fonts/fontawesome-webfont.woff2 on line 519
+[05-May-2018 11:47:21 CST6CDT] PHP Warning:  Unexpected character in input:  '' (ASCII=6) state=0 in /home/mycity29/public_html/fonts/fontawesome-webfont.woff on line 434
+[05-May-2018 11:47:21 CST6CDT] PHP Warning:  Unexpected character in input:  '' (ASCII=22) state=0 in /home/mycity29/public_html/fonts/fontawesome-webfont.woff on line 435
+[05-May-2018 11:47:21 CST6CDT] PHP Parse error:  syntax error, unexpected '_b·' (T_STRING) in /home/mycity29/public_html/fonts/fontawesome-webfont.woff on line 435
+[05-May-2018 11:47:22 CST6CDT] PHP Parse error:  syntax error, unexpected '.', expecting end of file in /home/mycity29/public_html/fonts/fontawesome-webfont.ttf on line 523

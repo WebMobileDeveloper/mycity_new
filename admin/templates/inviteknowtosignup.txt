@@ -1,0 +1,10 @@
+<p>Hello {receipent},</p>
+
+<p>Someone is looking at you on mycity.com please join so we can connect you!!</p>
+
+ 
+<p><strong style='color:#f00'>Mycity.com</strong><br/>
+ Bob Friedenthal, President<br/>
+ <a href='mailto:bob@mycity.com' target='_blank' >bob@mycity.com</a><br/>
+ 310-736-5787
+ </p>

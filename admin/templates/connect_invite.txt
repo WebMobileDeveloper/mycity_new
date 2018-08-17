@@ -1,0 +1,10 @@
+<p>Hi {name},</p>
+<p>I found you on the mycity.com referral system. <br/>
+There are several highly rated people that would be good referral partners for you. </p>
+
+<p>Please see my <a href='{profile_url}' target='_blank'>profile.</a></p>
+
+<p>
+Bob Friedenthal<br/>
+310-736-5787<br/>
+<a href='mailto:bob@mycity.com' target='_blank'>bob@mycity.com</a></p> 

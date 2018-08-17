@@ -1,0 +1,9 @@
+<p>Hi</p>
+
+<p>You recently signed up in MyCity.com using the email - {email}. Please click on the below link to verify it.</p>
+
+<a href='{verify_url}' target='_blank'>{verify_url}</a> 
+<p>Sincerely,<br />
+Bob Friedenthal<br />
+Bob@mycity.com<br />
+310-736-5787</p>

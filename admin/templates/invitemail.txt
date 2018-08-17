@@ -1,0 +1,22 @@
+<p><strong><small>Hello {receipent},</small></strong></p>
+
+<p><strong><small>Welcome to MyCity.com. Thank you for joining.</small></strong></p>
+
+<p><strong><small>We are here to help you grow your business. Harness the power of the people you know, networking, and using data to increase your referrals.</small></strong></p>
+
+<p><strong><small>There is a tremendous value in receiving referrals. Referrals are typically warm leads where you are more likely to close deals. This is precisely why referral networking groups over the years have been so successful. </small></strong></p>
+
+<p><strong><small>Work with other referral partners and share data as noted below for introductions/referrals.</small></strong></p>
+
+<p><strong><small>Weekly networking is very time-consuming. Our surveys indicate that few people have free time. Yet, at the same time they all want to grow their businesses.</small></strong></p>
+
+<p><strong><small>The MyCity.com system is changing the way people network by using data. The system searches by Vocation, Location, Rating, Expertise and Recommendation.</small></strong></p>
+
+<p><strong><small>Please make sure to fill out your profile completely so we can make suggested introductions / referrals to you.</small></strong></p>
+
+<p><strong><small>Please give me a call. I would like to learn more about you.</small></strong></p>
+
+<p><strong><small>Sincerely,<br />
+Bob Friedenthal<br />
+Bob@mycity.com<br />
+310-736-5787</small></strong></p>

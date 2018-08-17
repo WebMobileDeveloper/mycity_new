@@ -1,0 +1,23 @@
+<p>Hello {receipent},</p>
+<p>We are here to help you grow your business, helping you harnessing thepower of the people that you know, networking, 
+and using data to increaseyour referrals.</p>
+<p>There is a tremendous value in receiving referrals. 
+Referrals aretypically warm leads where you are more likely to close deals. 
+This is precisely why referral networking groups over the years have beenso successful. 
+</p>
+<p>Weekly networking is very time-consuming. Our surveys indicate that fewpeople have free time. 
+Yet, at the same time they all want to grow theirbusinesses.</p>
+<p>The MyCity.com system is changing the way people network by using data. 
+The system searches by Vocation, Location, Rating and Expertise.</p>
+<p>Now that you are a member of MyCity.com let us help you to grow yourbusiness. 
+Please make sure to fill out your profile completely so we can makesuggested introductions / referrals to you. </p>
+
+<p>Please give me a call. I would like to learn more about you.</p>
+<br/> 
+<br/>
+<p>
+Sincerely,<br/>
+Bob Friedenthal<br/>
+Bob@mycity.com<br/>
+310-736-5787 
+</p> 

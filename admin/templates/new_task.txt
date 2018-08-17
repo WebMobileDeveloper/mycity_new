@@ -1,0 +1,15 @@
+<p>Hi {receipent_name},</p>
+<p>You have been assigned a new task by MyCity.Com admin. Please login and go to dashboard to see the assigned task.
+</p>  
+<hr/>
+<p><strong>Task Schedule Date:</strong> {task_date}</p>
+<p><strong>Task is related to:</strong> {related_member}</p>
+<p><strong>Details of the task:</strong></p>
+<div>
+{task_body}
+</div>
+<hr/>
+
+
+
+

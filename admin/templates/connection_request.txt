@@ -1,0 +1,8 @@
+<p>Hi {receipent},</p>
+<p>{sender} - {vocation} would like to add you as a direct connection.<br/><br/>
+In order to manage this request, please follow the steps listed below:<br/><br/>
+i) Login to MyCity.com (click <a target='blank' href='https://mycity.com/login.php?token={tokenid}&l={tokenlength}'>here</a>) and go to Dashboard.<br/>
+ii) Go to Messages -> Connection Requests Received<br/>
+iii) Check the request lists and click "Accept" to get connected.
+</p>
+

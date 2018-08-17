@@ -1,0 +1,15 @@
+<p>Hi {receipent_name},</p>
+<p>Your activity with client {client_name} is almost one week. Please login and go to dashboard to see the follow up action. 
+If there has been progress please mark it so.
+</p>  
+<hr/>
+<p><strong>Last worked on:</strong> {last_work_date}</p> 
+<p><strong>Details of the task:</strong></p>
+<div>
+{task_body}
+</div>
+<hr/>
+
+
+
+

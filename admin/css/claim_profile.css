@@ -1,0 +1,247 @@
+/*-------------------------------------------------------- Header Start--------------------------------------------------------*/
+.notifier:before
+{
+	content: "\f0f3";
+    background: #fff;
+    color: #ff0000;
+    border-radius: 50px;
+    padding: 6px;
+    font-size: 18px;
+    width: 25px;
+    display: inline-block;
+    height: 25px;
+    text-align: center;
+    position: absolute;
+    left: 15px;
+    top: 25px;font: normal normal normal 14px/1 FontAwesome;
+}
+section.header {
+    background: rgba(0, 0, 0, 0.67);
+    padding: 25px 0 0 0; 
+    width: 100%;
+    background: rgb(94, 94, 94); 
+    z-index: 1000;
+}
+
+section.header ul {
+    margin-top: 35px;
+}
+
+a.noborder:link, a.noborder:visited, a.noborder:hover
+{
+	text-decoration:none;
+	border:none;outline:none;
+}
+section.header a#play-video img.profile
+{
+	width: 230px; border: 0; 
+}
+
+@media (max-width: 767px) {
+    .nav-side-menu {
+        z-index: 1000 !important;
+    }
+}
+
+section.header ul li {
+    display: inline-block;
+    cursor: pointer;
+}
+
+section.header ul li a {
+    color: #fff;
+    padding: 12px 08px;
+    font-size: 14px;
+}
+
+section.footer {
+    background: #1c0a2c;
+    padding: 25px 0;
+    position: relative;
+}
+
+section.footer ul {
+    margin-top: 15px;
+}
+
+section.footer ul li {
+    display: inline-block;
+}
+
+section.footer ul li a {
+    color: #fff;
+    padding: 12px 08px;
+    font-size: 14px;
+}
+
+section.welcome-sec.next-sections {
+    color: #000;
+    padding-bottom: 270px !important;
+    padding-top: 90px;
+    background-color: #fff;
+}
+
+ .next-sections h1 {
+    font-family: Montserrat-Regular;
+    font-size: 37px;
+    color: #000;
+    margin-top: 50px;
+}
+  
+
+section.welcome-sec.next-sections h4 {
+    font-family: Montserrat-Regular;
+    font-size: 33px;
+    color: #000;
+}
+
+section.welcome-sec.next-sections p {
+    font-family: Montserrat-Regular !important;
+    font-size: 20px;
+    color: #000;
+    font-weight: 100;
+}
+
+section.welcome-sec.next-sections input::-webkit-input-placeholder {
+    color: #000;
+    padding-left: 15px;
+} 
+section.welcome-sec.next-sections .input-group {
+    margin-top: 37px;
+} 
+#callin-section
+{
+    padding: 50px 0;
+    background-color: #4da4ef;
+    clear:both;
+    margin-top: 10px;
+} 
+
+.btn-blue
+{
+    background-color: #4da4ef;
+    border:1px solid #4da4ef !important;
+    color:#fff; 
+    font-size: 25px !important;
+    border-radius: 50px !important;
+    padding: 6px 30px !important;
+    margin-top: 4px !important;
+	font-weight:bold;border:2px solid #fff !important;
+} 
+.btn-blue:hover
+{
+	background-color: #1580DD !important;
+	border:1px solid #1580DD !important;
+	color:#fff !important; 
+} 
+
+.btn-white
+{
+	background-color: #fff;
+    color:#4da4ef;margin-top: 15px;
+    font-size: 32px !important;
+    border-radius: 50px !important;
+    padding: 6px 30px !important;
+	font-weight:bold;border:2px solid #fff !important;
+}
+
+.btn-white-outline
+{
+	background-color: #fff !important;
+	border:2px solid #fff !important;
+	color:#4da4ef;
+	font-weight:bold;
+}
+.into-text 
+{
+    
+    margin-top: 40px;
+    font-size: 22px  !important; 
+}
+
+.margin-sm
+{
+  margin-top: 60px !important; 
+}
+
+.text-lg
+{
+    font-size: 35px  !important;
+    color: #fff;
+}
+
+.text-md 
+{
+    margin-top: 40px;
+    font-size: 30px  !important; 
+}
+
+.form-control2
+{
+    font-size: 25px !important;
+    padding: 5px !important;
+    border: 2px solid #14b3ff !important;
+    border-radius: 4px !important;
+    background-color: #fff;
+    height: 55px !important;
+}
+ 
+
+article 
+{
+    display: flex;
+} 
+.content
+{
+  width: 55%; float:left;
+  padding-left: 50px;
+}    
+  
+  .content__header
+  {
+      width: 37%;
+      padding-right: 3%;
+      text-align: right;
+      display: inline-block;
+      vertical-align: top;
+  }
+   
+
+
+#profile.profile
+{
+	 padding: 200px 0 90px  !important;background: url(../images/contact-bg.jpg) center no-repeat;
+    background-size: cover !important;
+}
+
+#profile.profile h1.large
+{
+	color: #1c0a2c;
+    font-size: 50px;
+    font-family: Montserrat-Regular !important;
+    margin-bottom: 0; 
+}
+
+.profile-summary
+{
+	padding: 30px 0;
+}
+
+.profile-summary h2
+{
+	font-size: 30px;
+	border-bottom: 1px solid #efefef;
+	padding-bottom: 15px;
+}
+
+p.large
+{
+    font-size: 18px;line-height: 1.777;
+}
+
+.text-large 
+{
+    font-size: 35px  !important;
+    color: #fff;
+    padding: 20px 0 40px 0;
+}

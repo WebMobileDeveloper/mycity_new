@@ -1,0 +1,126 @@
+/*-------------------Font Family---------------------------------*/
+/*@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900);*/
+/*@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700);*/
+/*@import url(http://fonts.googleapis.com/css?family=Montserrat);*/
+@font-face {
+    font-family: 'Montserrat-Light';
+    src: url(../fonts/Montserrat-Light.otf), url(../fonts/Montserrat-Light.eot), url(../fonts/Montserrat-Light.ttf), url(../fonts/Montserrat-Light.woff);
+}
+
+@font-face {
+    font-family: Montserrat-Regular;
+    src: url(../fonts/Montserrat-Regular.otf), url(../fonts/Montserrat-Regular.ttf), url(../fonts/Montserrat-Regular.woff), url(../fonts/Montserrat-Regular.eot);
+}
+
+@font-face {
+    font-family: Montserrat-Bold ;
+    src: url(../fonts/Montserrat-Bold.otf), url(../fonts/Montserrat-Bold.eot), url(../fonts/Montserrat-Bold.ttf), url(../fonts/Montserrat-Bold.woff);
+}
+
+@font-face {
+    font-family: Montserrat-Semibold;
+    src: url(../fonts/Montserrat-SemiBold.otf);
+}
+
+@font-face {
+    font-family: OpenSans-Regular;
+    src: url(../fonts/OPENSANS-REGULAR_1.TTF);
+}
+
+
+@font-face {
+    font-family: OpenSans-Light;
+    src: url(../fonts/OPENSANS-LIGHT.TTF);
+}
+
+@font-face {
+    font-family: OpenSans-Bold;
+    src: url(../fonts/OPENSANS-BOLD_0.TTF);
+}
+
+@font-face {
+    font-family: OpenSans-semibold;
+    src: url(../fonts/OPENSANS-SEMIBOLD.TTF);
+}
+
+body {
+    font-size: 100%;
+}
+
+.block {
+    display: block !important;
+}
+
+.inline-block {
+    display: inline-block !important;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.no-left-border {
+    border-left: 0 !important;
+}
+
+.no-right-border {
+    border-right: 0 !important;
+}
+
+.no-top-border {
+    border-top: 0 !important;
+}
+
+.no-bottom-border {
+    border-bottom: 0 !important;
+}
+
+.no-padd {
+    padding: 0px !important;
+}
+
+.padd-8 {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
+
+.padd-5 {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+
+.padd-3 {
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+}
+
+.padd-1 {
+    padding-left: 1px !important;
+    padding-right: 1px !important;
+}
+
+.no-padd-left {
+    padding-left: 0 !important;
+}
+
+.no-padd-right {
+    padding-right: 0 !important;
+}
+
+a:hover, a:focus {
+    text-decoration: none !important;
+}
+
+.no-margin {
+    margin: 0px !important;
+}
+
+ul {
+    padding: 0px;
+    list-style: none;
+}

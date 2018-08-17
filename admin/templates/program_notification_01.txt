@@ -1,0 +1,12 @@
+<p>Hello {receipent},</p>
+<p>You have not entered any notes in the 3 Touch system. Did you meet? And how did it go? 
+If you haven't met, please make sure to schedule a meeting. 
+</p>
+<br/> 
+<br/>
+<p>
+Sincerely,<br/>
+Bob Friedenthal<br/>
+Bob@mycity.com<br/>
+310-736-5787 
+</p> 

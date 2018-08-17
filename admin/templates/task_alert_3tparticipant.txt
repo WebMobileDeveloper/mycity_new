@@ -1,0 +1,9 @@
+<p>Hi {receipent_name},</p>
+<p>This is a reminder after your meeting with {client_name} you were supposed to send an introduction or referral to him yet nothing has been logged. 
+Please make sure to do an introduction or referral and record in the 3 touch system. 
+</p>  
+ 
+
+
+
+

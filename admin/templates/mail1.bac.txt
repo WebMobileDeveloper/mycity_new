@@ -1,0 +1,32 @@
+<p>Hello {receipent},</p>
+<p>{user} is a referral partner of {rated_by}. He gave a high rating of {introducee} on the following questions:<br/> 
+<ol style="margin-left: 16px;">
+    <li>Do you want to grow your business?</li>
+    <li>Are you willing to network?</li>
+    <li>Are you willing to give referrals?</li>
+    <li>What is your expertise in your field?</li>
+</ol>
+</p>
+<p>
+They also mentioned that you are interested in meeting someone in the following vocation.
+</p>
+
+<div style="margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #efefef;padding:10px;
+    border-radius: 4px; ">  
+				<p><strong>Name:</strong> {introducee}</p>
+					<p><strong>Profession:</strong> {introducee_profession}</p>
+				<p><strong>Email:</strong> {introducee_email}</p>
+				<p><strong>Phone:</strong> {introducee_phone}</p>
+			</div>
+<p>We matched an individual also with high ratings through your friend\'s partner network.<br/> 
+<br/>
+Sincerely,<br/>
+Referrals@mycity.com<br/>
+</p>
+<p>
+If you would like more information,<br/>
+please email or call<br/>
+310-736-5787<br/>
+<a href='mailto:bob@mycity.com' target='_blank'>bob@mycity.com</a></p>
