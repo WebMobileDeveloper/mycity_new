@@ -1,0 +1,26 @@
+<section id="sec_six" class="next-sections form-large" style="display: block; pointer-events: auto;">
+        <div class="container">
+            <div class="row">
+                <?php echo form_open() ; ?>
+                    <div class="col-md-12">
+						<h1 class="description">Select your city</h1>
+                    </div> 
+                    <div class="col-md-4 col-md-offset-4 logo-background groups">
+                        <div class="multi-select ages groups_append" data-name="ages" data-required="1" data-max="3" data-numbered="0" data-clearable="1">
+                            <div class="form-group">
+                                <select name="groups[]" data-name="ages" class="form-control select2 signup select2-hidden-accessible" data-class="form-large" tabindex="-1" aria-hidden="true">
+                                    <option value="null">City Name</option>
+                                    <option value="132">Acapulco MX</option><option value="53">Atlanta</option><option value="77">Austin Texas</option><option value="98">Bakersfield</option><option value="33">BASIC</option><option value="135">Bend OR</option><option value="27">Beverly Hills</option><option value="100">Beverly Hills 2</option><option value="119">Boston</option><option value="65">Burbank</option><option value="71">Calabasas</option><option value="11">Camarillo</option><option value="45">Century City</option><option value="136">Chandler AZ</option><option value="79">Chatsworth</option><option value="128">Chicago</option><option value="138">Cleveland OH</option><option value="57">Clovis</option><option value="39">Colorado Springs</option><option value="103">Covina</option><option value="81">Dallas</option><option value="101">Delray Beach, FL</option><option value="85">Demo</option><option value="51">Denver</option><option value="116">Des Moines</option><option value="17">Encino</option><option value="19">Encino 2</option><option value="131">Fresno</option><option value="13">Glendale CA</option><option value="124">Greenville TN</option><option value="63">Honolulu</option><option value="75">Houston</option><option value="67">Huntsville</option><option value="108">Inland Empire</option><option value="102">Kansas City</option><option value="95">La Mesa</option><option value="113">Lake Forest</option><option value="111">Las Vegas</option><option value="41">Long Beach</option><option value="137">Los Angeles</option><option value="122">Louisville</option><option value="43">Miami</option><option value="99">Nashville, TN</option><option value="59">New York</option><option value="121">New York City</option><option value="107">Newport Beach</option><option value="55">Non Geographic</option><option value="25">Orange County</option><option value="117">Orlando</option><option value="134">Patterson NJ</option><option value="15">Phoenix</option><option value="125">Pompano Beach FL</option><option value="47">Port Chester, NY</option><option value="97">Portland, OR</option><option value="129">Rochester NY</option><option value="21">Sacramento</option><option value="123">Salem OR</option><option value="109">San Antonio</option><option value="35">San Diego</option><option value="87">San Diego 11am</option><option value="115">San Diego Downtown</option><option value="91">San Diego North County- Carlsbad</option><option value="69">San Francisco East Bay Area</option><option value="112">San Franciso</option><option value="118">San Jose</option><option value="83">Santa Monica</option><option value="96">South Bay</option><option value="104">Springfield, MA</option><option value="127">St. Paul MN</option><option value="106">Tacoma</option><option value="120">Tampa</option><option value="130">Temecula</option><option value="37">Test</option><option value="139">TESTING</option><option value="105">The Villages, FL</option><option value="9">Thousand Oaks</option><option value="49">Trusted Advisors- San Diego</option><option value="89">Tucson</option><option value="114">Tustin</option><option value="23">Valencia</option><option value="126">Ventura</option><option value="61">Ventura County</option><option value="93">Ventura County Referral Network</option><option value="110">Visalia</option><option value="146">Wangkhei</option><option value="133">Washington DC</option><option value="31">West Hollywood</option><option value="7">West LA</option><option value="73">Woodland Hills</option>                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <p><a class="add-more" id="add_more_groups" data-for="ages"><i class="fa fa-plus-circle"></i> Add another</a></p>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" value='save_group' name="btn_save_group" class="nextBtn btn btn-block button green submit">Next</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
