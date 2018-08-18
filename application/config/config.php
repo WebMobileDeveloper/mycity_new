@@ -24,18 +24,32 @@ date_default_timezone_set('America/Los_Angeles');
 |
 */
 
-$config['base_url'] = 'https://mycity.com/';
-$config['site_url'] = 'https://mycity.com/index.php/';
+switch (ENVIRONMENT)
+{
+    case 'development':
+        $config['base_url'] = 'http://localhost:81/';
+        $config['site_url'] = 'http://localhost:81/index.php/';
+        define("BASE_URL", "http://localhost:81");
+        break;
+    case 'testing':
+        break;
+    case 'production':
+        $config['base_url'] = 'https://mycity.com/';
+        $config['site_url'] = 'https://mycity.com/index.php/';
+        define("BASE_URL", "https://mycity.com");
+        break;
+
+    default:
+}
 
 $config['asset'] = "assets/";
 $config['css'] = "assets/css/";
 $config['js'] = 'assets/js/';
-$config['image'] = 'assets/images/';  
+$config['image'] = 'assets/images/';
 $config['uploadpath'] =  'assets/uploads/profiles/';
 $config['profile_img'] =  'assets/uploads/profiles/';
 $config['fileuploadpath'] =  'assets/uploads/';
 $config['site_path'] =   DIRECTORY_SEPARATOR . 'home'. DIRECTORY_SEPARATOR . 'mycity29'. DIRECTORY_SEPARATOR . 'public_html'. DIRECTORY_SEPARATOR   ;
-
 /*
 |--------------------------------------------------------------------------
 | Index File

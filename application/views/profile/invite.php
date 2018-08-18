@@ -59,7 +59,7 @@
 				<div class=" col-xs-12 col-sm-12 text-center" style='height: 80vh; padding-top: 60px;'>    
 				  <h1>Invalid Page Access</h1>
 				  <p class='into-text'>Seems like you have reached the page wrongly.</p> 
-					<p><br/><a href='https://mycity.com' class='btn btn-success'>Back to Home</a></p>
+					<p><br/><a href='<?php echo BASE_URL;?>' class='btn btn-success'>Back to Home</a></p>
 				</div>
 			
 				<?php 

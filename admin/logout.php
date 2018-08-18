@@ -1,5 +1,12 @@
 <?php
 session_start();
+if ($_SERVER['SERVER_NAME']=='localhost') {
+    define("ENVIRONMENT", "development");
+    define("BASE_URL", "http://localhost:81");
+} else {
+    define("ENVIRONMENT", "production");
+    define("BASE_URL", "https://mycity.com");
+}
 include_once 'includes/db.php';
 
 $headers  = 'MIME-Version: 1.0' . "\r\n";
@@ -101,7 +108,5 @@ if (isset($_COOKIE['_rmtoken'])) {
     setcookie('_rmtoken', null, -1, '/');  
     
 }
-echo "<script>window.open('https://mycity.com/', '_self')</script>";
-
-
+echo "<script>window.open('". BASE_URL ."', '_self')</script>";
 ?>

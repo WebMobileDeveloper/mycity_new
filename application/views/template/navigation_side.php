@@ -134,7 +134,7 @@ else
 						<li><a href='<?php echo $base; ?>dashboard/top-rated-knows' ><i class="fa fa-user-plus"></i>View Top Rated Know</a></li> 
 						<li><a data-toggle="tab" href="#menu56" ><i class="fa fa-user-plus"></i>Add Business Card</a></li>  
 							
-						<li><a  href="https://mycity.com/invite-knows" ><i class="fa fa-bar-chart"></i> Generate Join mycity Landing Page</a></li> 
+						<li><a  href="<?php echo BASE_URL;?>/invite-knows" ><i class="fa fa-bar-chart"></i> Generate Join mycity Landing Page</a></li>
 						 
 						<?php }else 
 						 {

@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'home';
 $route['404_override'] = 'page_not_found';
-$route['translate_uri_dashes'] = FALSE; 
+$route['translate_uri_dashes'] = FALSE;
 $route['profile/(:any)'] = 'profile/view/$1';
 $route['profile/(:any)/(:num)'] = 'profile/view/$1';
 $route['profile/invite/'] = 'profile/invite/';

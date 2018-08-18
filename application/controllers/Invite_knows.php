@@ -78,7 +78,7 @@ class Invite_knows extends CI_Controller
 				)  
 			);
 			//send email
-			$url = "https://mycity.com/profile/invite/" . $this->MyInviteKnowLog->get_url_by_id( $logid ); 
+			$url = "<?php echo BASE_URL;?>/profile/invite/" . $this->MyInviteKnowLog->get_url_by_id( $logid );
 		}
 		
 		$pagedata['url'] =   $url  ; 

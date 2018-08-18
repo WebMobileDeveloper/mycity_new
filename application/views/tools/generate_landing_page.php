@@ -64,13 +64,13 @@
 			{
 				echo "<tr>";
 				echo "<td>";
-				echo "<a href='https://mycity.com/profile/" .    $item->partner_id . "' target='_blank'>" . $item->username . "</a>";
+				echo "<a href='<?php echo BASE_URL;?>/profile/" .    $item->partner_id . "' target='_blank'>" . $item->username . "</a>";
 				echo "</td>";
 				echo "<td>";
 				echo $item->client_name;
 				echo "</td>";
 				echo "<td>";
-				echo  $url =  "https://mycity.com/profile/invite/" .  $item->partner_name . "/" . $item->know_name;
+				echo  $url =  "<?php echo BASE_URL;?>/profile/invite/" .  $item->partner_name . "/" . $item->know_name;
 				echo "</td>";
 				echo "</tr>";
 			}

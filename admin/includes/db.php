@@ -12,11 +12,17 @@ if(preg_match('/db.php/', $_SERVER['REQUEST_URI'])){header('location: ../dashboa
 $user = 'root';
 $pass = '';
 $db = 'mycity';*/
-
-$host = 'localhost';
-$user = 'mycity29_root';
-$pass = 'zBi6h49~';
-$db = 'mycity29_maindb';
+if(ENVIRONMENT == 'production'){
+    $host = 'localhost';
+    $user = 'mycity29_root';
+    $pass = 'zBi6h49~';
+    $db = 'mycity29_maindb';
+}else{
+    $host = 'localhost';
+    $user = 'root';
+    $pass = '';
+    $db = 'mycity29_maindb';
+}
 
 $link = mysqli_connect($host, $user, $pass, $db, 3306) or die('Database error' . mysqli_error($link));
 

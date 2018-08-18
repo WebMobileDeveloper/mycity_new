@@ -2358,6 +2358,8 @@ $(document).on('change', '.ed_client_pro', function ()
 })
 $(document).on('click', '.show_review', function () { $("#review_det").modal("show"); })
 
+$(document).on('click', '.claim-button', function () { $("#claim_modal").modal("show");  })
+
 $(document).on('click', '.showratingdetails', function () 
 {
 	var id = $(this).attr("data-id"); 
@@ -2374,4 +2376,60 @@ $(document).on('click', '.showratingdetails', function ()
 			}
 	 });  
 })
+
+$(function () {
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    $('#newModalForm').submit(function (event) {
+        event.preventDefault();
+        var first_name = $('#first_name').val();
+        var last_name = $('#last_name').val();
+        var email = $('#email').val();
+		var ajax_url = $('#ajax_url').val();
+        $('.first_name_message').html('');
+        $('.last_name_message').html('');
+        $('.email_message').html('');
+
+        if (first_name == "") {
+            $('.first_name_message').html('Input your first name.');
+            return;
+        }
+        if (last_name == "") {
+            $('.last_name_message').html('Input your last name.');
+            return;
+        }
+        if (email == "") {
+            $('.email_message').html('Input your email address.');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            $('.email_message').html('Input your valid email address.');
+            return;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: ajax_url,
+            data: {
+                'first_name': first_name,
+                'last_name': last_name,
+                'email': email
+            },
+            dataType: 'html',
+            success: function (result) {
+                if (result == "success") {
+                    $('.modal-body').html("Confirm sent to '"+ email+"' successfully.");
+                    return false;
+                }else{
+                    $('.email_message').html(result);
+                    return false;
+				}
+            }
+        });
+    });
+});
 

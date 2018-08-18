@@ -112,7 +112,7 @@ if ( !is_null( $this->input->cookie('_mcu') ))
 						}
 						else 
 						{
-							echo " <li><a href='https://mycity.com/admin/dashboard.php'><i   class='fa fa-home' title='Home'></i>"; 
+							echo " <li><a href='<?php echo BASE_URL;?>/admin/dashboard.php'><i   class='fa fa-home' title='Home'></i>";
 						} 
 						 echo "<span class='menu-label'>Home</span>
 						 </a></li>";
