@@ -1,5 +1,5 @@
 <?php
-	session_start();
+if(!isset($_SESSION))session_start();
 	header("Access-Control-Allow-Origin: *");
 	date_default_timezone_set('America/Los_Angeles');
 	use \Psr\Http\Message\ServerRequestInterface as Request;
@@ -18,7 +18,7 @@
 				[
 					'host' => 'localhost', 
 					'user' => 'root',
-					'password' => 'mysql',
+					'password' => '',
 					'db' => 'mycity29_maindb' 
 				],
 			],

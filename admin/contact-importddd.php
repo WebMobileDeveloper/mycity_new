@@ -1,5 +1,5 @@
 <?php
-session_start();
+if(!isset($_SESSION))session_start();
 
 //include google api library
 require_once 'gapi/src/google/autoload.php'; 

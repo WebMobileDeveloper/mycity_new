@@ -1,5 +1,5 @@
 <?php
-session_start();
+if(!isset($_SESSION))session_start();
 	$ds = DIRECTORY_SEPARATOR;  //1
 	$apppath = '';
 	$storeFolder =  'assets/uploads';   //2

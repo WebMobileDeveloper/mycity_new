@@ -403,9 +403,9 @@ class CI_Input {
 		else
 		{
 			$expire = ($expire > 0) ? time() + $expire : 0;
-		}
+        }
 
-		setcookie($prefix.$name, $value, $expire, $path, $domain, $secure, $httponly);
+		setcookie($prefix.$name, $value, (int)$expire, $path, $domain, $secure, $httponly);
 	}
 
 	// --------------------------------------------------------------------

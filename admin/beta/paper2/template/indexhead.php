@@ -1,5 +1,5 @@
 <?php
-session_start();
+if(!isset($_SESSION))session_start();
 include_once 'includes/db.php';
 include_once 'includes/functions.php';
 date_default_timezone_set('America/Los_Angeles');

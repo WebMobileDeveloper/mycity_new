@@ -12,14 +12,14 @@ ini_set('post_max_size', '64M');
 ini_set('upload_max_filesize', '64M');
 
 
-session_start();
+if(!isset($_SESSION))session_start();
 include_once 'db.php';
 include_once 'functions.php';
 
 
 if(  $_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "mycity.dev")
 {
-    $siteurl = 'http://'. $_SERVER['SERVER_NAME'] . "/";
+    $siteurl = 'http://'. $_SERVER['HTTP_HOST'] . "/";
 } 
 else
 {
@@ -7870,7 +7870,7 @@ if(isset($_POST['invitelinkedincontact']))
 			 //creating dynamic and hashed URL  
 			$len = strlen(md5( $id )) . 's' .  strlen(   (string)$id ); 
 			$hid = md5( $id ) . $id . md5( $id );
- 			$lurl = 'https://mycity.com/landing.php?id=' . md5( $id ) . '&l=' . $len  .  '&hid='  .  $hid ; 
+ 			$lurl = $siteurl.'/landing.php?id=' . md5( $id ) . '&l=' . $len  .  '&hid='  .  $hid ;
 			$landingpage = "<a target='_blank' href='$lurl'>here</a>"; 
     		
 			$results = $link->query("select * from mc_mail_templates where id='$templateid'  "); 

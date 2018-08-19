@@ -6,7 +6,7 @@
  * Time: 4:27 PM
  */
 
-session_start();
+if(!isset($_SESSION))session_start();
 include_once '../includes/db.php';
 
 $date_time = date("Y-m-d H:i:s");

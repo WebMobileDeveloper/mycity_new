@@ -27,9 +27,10 @@ date_default_timezone_set('America/Los_Angeles');
 switch (ENVIRONMENT)
 {
     case 'development':
-        $config['base_url'] = 'http://localhost:81/';
-        $config['site_url'] = 'http://localhost:81/index.php/';
-        define("BASE_URL", "http://localhost:81");
+        $config['base_url'] = 'http://localhost/';
+        $config['site_url'] = 'http://localhost/index.php/';
+        define("BASE_URL", "http://localhost");
+        define("ADMIN_BASE_URL", "http://localhost/admin");
         break;
     case 'testing':
         break;
@@ -37,6 +38,7 @@ switch (ENVIRONMENT)
         $config['base_url'] = 'https://mycity.com/';
         $config['site_url'] = 'https://mycity.com/index.php/';
         define("BASE_URL", "https://mycity.com");
+        define("ADMIN_BASE_URL", "https://mycity.com/admin");
         break;
 
     default:

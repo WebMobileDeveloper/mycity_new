@@ -10,7 +10,7 @@ include_once 'includes/functions.php';
 
 if(  $_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "mycity.dev")
 {
-    $siteurl = 'http://'. $_SERVER['SERVER_NAME'] . "/";
+    $siteurl = 'http://'. $_SERVER['HTTP_HOST'] . "/";
 } 
 else
 {
@@ -4042,7 +4042,7 @@ endif;
                     </ul>
                 </nav>
                 <div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, <a href="https://mycity.com">MyCity.com</a>
+                    &copy; <script>document.write(new Date().getFullYear())</script>, <a href="<?php echo BASE_URL;?>">MyCity.com</a>
                 </div>
             </div>
         </footer>

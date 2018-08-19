@@ -108,11 +108,11 @@ if ( !is_null( $this->input->cookie('_mcu') ))
 						
 						 if( $this->session->role =='user' || ($switcher == 'on' && $this->session->switcher == 'on') ) 
 						{
-							echo " <li><a href='" . $base  . "dashboard'><i   class='fa fa-home' title='Home'></i>"; 
+							echo " <li><a href='" . BASE_URL  . "dashboard'><i   class='fa fa-home' title='Home'></i>";
 						}
 						else 
 						{
-							echo " <li><a href='<?php echo BASE_URL;?>/admin/dashboard.php'><i   class='fa fa-home' title='Home'></i>";
+							echo " <li><a href='".BASE_URL."/admin/dashboard.php'><i   class='fa fa-home' title='Home'></i>";
 						} 
 						 echo "<span class='menu-label'>Home</span>
 						 </a></li>";

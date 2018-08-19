@@ -139,8 +139,9 @@ else
 						<?php }else 
 						 {
 							?>
-							<li><a  href="<?php echo $base; ?>my-network"  ><i class="fa fa-user-plus"></i>Add/Update People</a></li> 
-							<?php
+							<li><a  href="<?php echo $base; ?>my-network"  ><i class="fa fa-user-plus"></i>Add/Update People</a></li>
+                             <li><a data-toggle="tab" class="btnviewhighrankknows" href="#menu60"><i class="fa fa-user-plus"></i>View Top Rated Know</a></li>
+                             <?php
 						 }?> 
 						<li class="close_drop"><a href="<?php echo $base; ?>dashboard/referrals" id='hint-addreferral'> <i class="fa fa-users"></i>Introduction/Referral</a>
 							<a href="<?php echo $help_data_buttons[1]['helpvideo']; ?>" target="_blank" ><i class='fa fa-arrow-right' ></i><span style="color:red;"> Help</span></a>

@@ -2,63 +2,63 @@
 include("header.php");
 include_once 'includes/db.php';
 include_once 'includes/functions.php';
-if (isset($_SESSION['user_id']))
-{
+if (isset($_SESSION['user_id'])) {
     header('location: dashboard.php');
 }
- 
- 
-if(isset($_POST['btnlandingsignup']))
-{
+
+
+if (isset($_POST['btnlandingsignup'])) {
     $landingzip = $_POST['landingzip'];
-    $landingcity = $_POST['landingcity']; 
+    $landingcity = $_POST['landingcity'];
 }
-if(  $_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "mycity.test")
-{
-    $siteurl = 'http://'. $_SERVER['SERVER_NAME'] . "/";
-} 
-else
-{
-    $siteurl =  'https://mycity.com/';
+
+if ($_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "mycity.test") {
+    $siteurl = 'http://' . $_SERVER['HTTP_HOST'] . "/";
+} else {
+    $siteurl = 'https://mycity.com/';
 }
-$param = array('id' => '0'); 
-$groups = json_decode(   curlexecute($param, $siteurl . 'api/api.php/groups/'), true);  
-$vocations =    json_decode(   curlexecute($param, $siteurl . 'api/api.php/vocations/'), true); 
-$cities = json_decode(   curlexecute($param, $siteurl . 'api/api.php/cities/'), true); 
+//echo $siteurl;
+//echo "<pre>";
+//print_r($_SERVER);
+//echo "</pre>";
+//exit();
+$param = array('id' => '0');
+$groups = json_decode(curlexecute($param, $siteurl . 'api/api.php/groups/'), true);
+$vocations = json_decode(curlexecute($param, $siteurl . 'api/api.php/vocations/'), true);
+$cities = json_decode(curlexecute($param, $siteurl . 'api/api.php/cities/'), true);
 
-$param = array('userid' =>  $user_id, 'goto' => 1);
-$mynotes = json_decode(   curlexecute($param, $siteurl . 'api/api.php/notes/getall/'), true);
+$param = array('userid' => isset($user_id) ? $user_id : '', 'goto' => 1);
+$mynotes = json_decode(curlexecute($param, $siteurl . 'api/api.php/notes/getall/'), true);
 
 
-$vocaoptions ='';
-foreach ($vocations as $vocation) 
-{
-	$vocaoptions .= "<option value='" . $vocation['voc_name'] . "'>" . $vocation['voc_name'] . "</option>"; 
+$vocaoptions = '';
+//var_dump($vocations);
+foreach ($vocations as $vocation) {
+    $vocaoptions .= "<option value='" . $vocation['voc_name'] . "'>" . $vocation['voc_name'] . "</option>";
 }
-$citynames ='';
-$grouplist ='';
-foreach ($groups as $group)
-{
-	if($group['grp_name'] != '')
-		$citynames .= "<option value='" . $group['grp_name'] . "'>" . $group['grp_name'] . "</option>";
- 
-	$grouplist .= "<option value='" . $group['id'] . "'>" . $group['grp_name'] . "</option>";
-}						
+$citynames = '';
+$grouplist = '';
+foreach ($groups as $group) {
+    if ($group['grp_name'] != '')
+        $citynames .= "<option value='" . $group['grp_name'] . "'>" . $group['grp_name'] . "</option>";
+
+    $grouplist .= "<option value='" . $group['id'] . "'>" . $group['grp_name'] . "</option>";
+}
 ?>
     <section id="main-section" class="welcome-sec next-sections">
         <div class="container">
             <div class="row">
-				
-				<?php 
-					if( sizeof($mynotes['results']) > 0 ): 
-						$row = $mynotes['results'][0];
-						echo '<div class="col-md-8 col-md-offset-2 text-center">';
-						echo "<div class='animated homeentice  bounce text-center '>";
-						echo  "<p>".$row['note'] . " </p>";
-						echo "</div></div>"; 
-					endif; 
-				?>
-			
+
+                <?php
+                if (sizeof($mynotes['results']) > 0):
+                    $row = $mynotes['results'][0];
+                    echo '<div class="col-md-8 col-md-offset-2 text-center">';
+                    echo "<div class='animated homeentice  bounce text-center '>";
+                    echo "<p>" . $row['note'] . " </p>";
+                    echo "</div></div>";
+                endif;
+                ?>
+
                 <div class="col-md-12 col-xs-12 col-sm-12 text-center">
                     <h3>Welcome to MyCity</h3>
                     <h4>Join for FREE to see people rated in your area</h4>
@@ -76,31 +76,31 @@ foreach ($groups as $group)
                                 <a href="#" class="nextBtn" data-sec="#sec_three" id="nextBtn1">GET STARTED</a>
                             </span>
                         </div>
-		 		 
-				 
-				 <div class="   panel-search-home"> 
-            <div class="panel-body">
-			<p class='txt-lg'>Search Business</p> 
-                 <div class="form-group">   
- <select data-placeholder="City" id="tbsearchbycity" name="tbsearchbycity"  class="form-control  "  > 
-                            <option value=''>Select City</option> 
-                 <?php 
-                    echo $citynames;            
-              ?>
-        </select>
-  </div>
-  <div class="form-group">   
-   <select data-placeholder='Vocations ...' class="form-control    " name="tbsearchbyvoc" id="tbsearchbyvoc"  > 
-       <?php
-	   echo $vocaoptions;
-	  ?>
-  </select>  
-  </div>
-  <button type="submit" id="form_search_business" class="flatbutton">Search</button>
-  </div>
-  </div>  
-  
-  
+
+
+                        <div class="   panel-search-home">
+                            <div class="panel-body">
+                                <p class='txt-lg'>Search Business</p>
+                                <div class="form-group">
+                                    <select data-placeholder="City" id="tbsearchbycity" name="tbsearchbycity" class="form-control  ">
+                                        <option value=''>Select City</option>
+                                        <?php
+                                        echo $citynames;
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select data-placeholder='Vocations ...' class="form-control    " name="tbsearchbyvoc" id="tbsearchbyvoc">
+                                        <?php
+                                        echo $vocaoptions;
+                                        ?>
+                                    </select>
+                                </div>
+                                <button type="submit" id="form_search_business" class="flatbutton">Search</button>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -147,100 +147,100 @@ foreach ($groups as $group)
             </div>
         </div>
     </section>
-    
-    
-	  <section id="sec_three" class="next-sections form-large">
+
+
+    <section id="sec_three" class="next-sections form-large">
         <div class="container">
             <div class="row sec_two">
                 <div class="col-md-12">
                     <h1 class="description">Tell us about yourself</h1>
                     <p class="description">Create Your Account. You know the drill...</p>
                 </div>
-                 
-	 
-	 <div class="col-md-4 col-md-offset-2  ">
-	 
+
+
+                <div class="col-md-4 col-md-offset-2  ">
+
                     <div class="form-group">
                         <input name="first_name" type="text" class="form-control" placeholder="First name" value="">
                         <label class="message"></label>
                         <span class="required">*</span>
                     </div>
-             </div>
-	 <div class="col-md-4 ">       
+                </div>
+                <div class="col-md-4 ">
                     <div class="form-group ">
                         <input name="last_name" type="text" class="form-control" placeholder="Last name" value="">
                         <label class="message"></label>
                         <span class="required">*</span>
                     </div>
-</div>
-	 <div class="col-md-4 col-md-offset-2  ">
-        <div class="form-group ">
+                </div>
+                <div class="col-md-4 col-md-offset-2  ">
+                    <div class="form-group ">
                         <input name="email2" type="email" class="form-control" placeholder="Email address" value="">
                         <label class="message"></label><span class="required">*</span>
                     </div>
-                   </div>
-	 <div class="col-md-4   "> 
+                </div>
+                <div class="col-md-4   ">
                     <div class="form-group">
                         <input name="password" type="password" class="form-control" placeholder="Create password">
                         <label class="message"></label>
                         <span class="required">*</span>
-                    </div> 
-	</div>
-	   
-	  <div class="col-md-8 col-md-offset-2  "> 
-			<div class="form-group">
-				<button type="button"  data-sec="#sec_sucess_msg"  class="btn btn-block button green submit regUser">Create account</button>
-			</div>
-	</div>
- <div class="col-md-10 col-md-offset-1  "> 	
-			<div class="form-group">
-				<p>By clicking "Create Account" you agree to the Mycity.com
-                                <a href="/terms-of-service.php" target="_blank">Terms of Services</a> and
-                                <a href="/privacy-policy.php" target="_blank">Privacy Policy</a>.
-				</p>
-			</div>
-        </div>
-	 </div>
-  </div>
-</section>
-	 <section id="sec_sucess_msg" class="next-sections form-large">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center pad8">
-                  <h1 class="description">Thanks for the registration!</h1>
-					
-					<h2>Your account has been created successfully.</h2>
-                    <p class="description">Let's gather some more information so we can introduce you to people in your area.</p>
-                </div>
-                <div class="col-md-4 col-md-offset-4 logo-background sec_two">
-
-       
-                    <div class="form-group">
-                        <button type="button" data-sec="#sec_member_address" id="nextBtn2" class="nextBtn  btn btn-block  button green submit">Next</button>
                     </div>
-					  
+                </div>
+
+                <div class="col-md-8 col-md-offset-2  ">
+                    <div class="form-group">
+                        <button type="button" data-sec="#sec_sucess_msg" class="btn btn-block button green submit regUser">Create account</button>
+                    </div>
+                </div>
+                <div class="col-md-10 col-md-offset-1  ">
+                    <div class="form-group">
+                        <p>By clicking "Create Account" you agree to the Mycity.com
+                            <a href="/terms-of-service.php" target="_blank">Terms of Services</a> and
+                            <a href="/privacy-policy.php" target="_blank">Privacy Policy</a>.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-     <section id="sec_member_address" class="next-sections form-large">
-       
-				 
-		<div class="container">
+    <section id="sec_sucess_msg" class="next-sections form-large">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center pad8">
+                    <h1 class="description">Thanks for the registration!</h1>
+
+                    <h2>Your account has been created successfully.</h2>
+                    <p class="description">Let's gather some more information so we can introduce you to people in your area.</p>
+                </div>
+                <div class="col-md-4 col-md-offset-4 logo-background sec_two">
+
+
+                    <div class="form-group">
+                        <button type="button" data-sec="#sec_member_address" id="nextBtn2" class="nextBtn  btn btn-block  button green submit">Next</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="sec_member_address" class="next-sections form-large">
+
+
+        <div class="container">
             <div class="row sec_two pad8">
                 <div class="col-md-12">
-                    <h1 class="description">Tell us about yourself</h1> 
+                    <h1 class="description">Tell us about yourself</h1>
                 </div>
-                 
-	 
-	 <div class="col-md-8 col-md-offset-2 ">				
-                   <div class="form-group ">
+
+
+                <div class="col-md-8 col-md-offset-2 ">
+                    <div class="form-group ">
                         <select name="country" class="form-control select2 signup select2-hidden-accessible" data-placeholder="Country" data-class="form-large"
                                 tabindex="-1" aria-hidden="true">
                             <option selected disabled="disabled" value="null">-select your country-</option>
                             <option value="United States">United States</option>
                             <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
-                             <option value="Afghanistan">Afghanistan</option>
+                            <option value="Afghanistan">Afghanistan</option>
                             <option value="Åland Islands">Åland Islands</option>
                             <option value="Albania">Albania</option>
                             <option value="Algeria">Algeria</option>
@@ -489,27 +489,27 @@ foreach ($groups as $group)
                             <option value="Zimbabwe">Zimbabwe</option>
                         </select> <span class="required">*</span>
                     </div>
-                   
-</div>
-	<div class="col-md-8 col-md-offset-2 "> 
-					 <div class="form-group">
-                        <input name="street" type="text" class="form-control" placeholder="Street Address"  >
+
+                </div>
+                <div class="col-md-8 col-md-offset-2 ">
+                    <div class="form-group">
+                        <input name="street" type="text" class="form-control" placeholder="Street Address">
                         <label class="message"></label>
                         <span class="required">*</span>
                     </div>
-      </div>
-	 <div class="col-md-4 col-md-offset-2  ">
-		<div class="form-group">
-			<input name="city" type="text" class="form-control" placeholder="City" value='<?php echo $landingcity; ?>'>
-            <label class="message"></label>
-            <span class="required">*</span>
-        </div>
-		
-		</div>
-	
-	 <div class="col-md-4   ">
-		<div class="form-group hidden">
-			<select name="province" class="form-control select2 signup select2-hidden-accessible" data-placeholder="Province"
+                </div>
+                <div class="col-md-4 col-md-offset-2  ">
+                    <div class="form-group">
+                        <input name="city" type="text" class="form-control" placeholder="City" value='<?php echo $landingcity; ?>'>
+                        <label class="message"></label>
+                        <span class="required">*</span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4   ">
+                    <div class="form-group hidden">
+                        <select name="province" class="form-control select2 signup select2-hidden-accessible" data-placeholder="Province"
                                 data-class="form-large" tabindex="-1" aria-hidden="true">
                             <option></option>
                             <option value="Alberta">Alberta</option>
@@ -525,28 +525,28 @@ foreach ($groups as $group)
                             <option value="Quebec">Quebec</option>
                             <option value="Saskatchewan">Saskatchewan</option>
                             <option value="Yukon">Yukon</option>
-            </select>
-			<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 385px;"><span class="selection"></span>
+                        </select>
+                        <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 385px;"><span class="selection"></span>
 			<span class="required">*</span>
-			</div>
-</div> 
-  <div class="col-md-4   ">
-			<div class="form-group">
+                    </div>
+                </div>
+                <div class="col-md-4   ">
+                    <div class="form-group">
                         <input name="zip" type="text" class="form-control" placeholder="ZIP" value='<?php echo $landingzip; ?>'>
                         <label class="message"></label>
                         <span class="required">*</span>
-                    </div>	  
-      </div>
-	  
-	  <div class="col-md-8 col-md-offset-2  "> 
-			<div class="form-group">
-				<button type="button" data-sec="#sec_five"  class="btn btn-block button green submit regUserAddress">Next</button>
-			</div>
-	</div> 
-	 </div>
-  </div>
-</section>		 
-           
+                    </div>
+                </div>
+
+                <div class="col-md-8 col-md-offset-2  ">
+                    <div class="form-group">
+                        <button type="button" data-sec="#sec_five" class="btn btn-block button green submit regUserAddress">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="sec_four" class="next-sections form-large">
         <div class="container">
             <div class="row">
@@ -564,7 +564,7 @@ foreach ($groups as $group)
                             <input type="hidden" name="lng" value="69.34511599999996">
                             <div id="map" style="position: relative; overflow: hidden; transform: translateZ(0px); background-color: rgb(229, 227, 223);">
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14140969.356001861!2d60.33919713135139!3d30.083155533278386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38db52d2f8fd751f%3A0x46b7a1f7e614925c!2sPakistan!5e0!3m2!1sen!2s!4v1457012176499"
-                                    width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                        width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                             </div>
                         </div>
 
@@ -591,10 +591,10 @@ foreach ($groups as $group)
                             <div class="vocation_append">
                                 <div class="form-group">
                                     <select name="interests[1]" data-name="interests" class="form-control select2   signup select2-hidden-accessible my_vocs"
-                                             placeholder="Select your vocation..." data-class="form-large" tabindex="-1" aria-hidden="true">
+                                            placeholder="Select your vocation..." data-class="form-large" tabindex="-1" aria-hidden="true">
                                         <option value="null">Select your vocation</option>
                                         <?php
-                                       echo $vocaoptions ;
+                                        echo $vocaoptions;
                                         ?>
                                     </select>
                                     <label class="message"></label>
@@ -602,21 +602,21 @@ foreach ($groups as $group)
                                 <div class="form-group" style="margin-top: 50px">
                                     <p class="description">Other ways of describing your vocation.</p>
                                     <select name="interests[2]" data-name="interests" class="form-control select2 signup select2-hidden-accessible my_vocs"
-                                             placeholder="Select your vocation..." data-class="form-large" tabindex="-1" aria-hidden="true">
+                                            placeholder="Select your vocation..." data-class="form-large" tabindex="-1" aria-hidden="true">
                                         <option value="null">Select your vocation</option>
                                         <?php
-                                       echo $vocaoptions ;
+                                        echo $vocaoptions;
                                         ?>
                                     </select>
                                     <label class="message"></label>
                                 </div>
                                 <div class="form-group">
-                                    <select name="interests[3]" data-name="interests" class="form-control select2 my_vocs  signup select2-hidden-accessible"  
-									placeholder="Select your vocation..."
+                                    <select name="interests[3]" data-name="interests" class="form-control select2 my_vocs  signup select2-hidden-accessible"
+                                            placeholder="Select your vocation..."
                                             data-class="form-large" tabindex="-1" aria-hidden="true" style="width: 100%;">
                                         <option value="null">Select your vocation</option>
                                         <?php
-                                        echo $vocaoptions ;
+                                        echo $vocaoptions;
                                         ?>
                                     </select>
                                     <label class="message"></label>
@@ -677,10 +677,10 @@ foreach ($groups as $group)
                          data-clearable="1">
                         <div class="form-group">
                             <select name="targeted_clients[1]" data-name="industries" class="form-control select2 signup select2-hidden-accessible target_clients"
-                                     placeholder="Select your client type..." data-class="form-large" tabindex="-1" aria-hidden="true">
+                                    placeholder="Select your client type..." data-class="form-large" tabindex="-1" aria-hidden="true">
                                 <option value="null">Select your client type...</option>
                                 <?php
-                                echo $vocaoptions ;
+                                echo $vocaoptions;
                                 ?>
                             </select>
                             <span class="required">*</span></div>
@@ -689,17 +689,17 @@ foreach ($groups as $group)
                                     placeholder="Select your client type..." data-class="form-large" tabindex="-1" aria-hidden="true">
                                 <option value="null">Select your client type...</option>
                                 <?php
-                               echo $vocaoptions ;
+                                echo $vocaoptions;
                                 ?>
                             </select>
 
                         </div>
                         <div class="form-group">
                             <select name="targeted_clients[3]" data-name="industries" class="form-control select2 signup select2-hidden-accessible target_clients"
-                                     placeholder="Select your client type..." data-class="form-large" tabindex="-1" aria-hidden="true">
+                                    placeholder="Select your client type..." data-class="form-large" tabindex="-1" aria-hidden="true">
                                 <option value="null">Select your client type...</option>
                                 <?php
-                               echo $vocaoptions ;
+                                echo $vocaoptions;
                                 ?>
                             </select>
 
@@ -716,8 +716,8 @@ foreach ($groups as $group)
             </div>
         </div>
     </section>
-	
-	<section id="sec_eight" class="next-sections form-large">
+
+    <section id="sec_eight" class="next-sections form-large">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -728,29 +728,29 @@ foreach ($groups as $group)
                          data-clearable="1">
                         <div class="form-group">
                             <select name="targeted_referral_partners[1]" data-name="industries" class="form-control select2 signup select2-hidden-accessible target_referrals"
-                                     placeholder="Select your referral vocation..." data-class="form-large" tabindex="-1" aria-hidden="true">
+                                    placeholder="Select your referral vocation..." data-class="form-large" tabindex="-1" aria-hidden="true">
                                 <option value="null">Select your referral vocation...</option>
                                 <?php
-                               echo $vocaoptions ;
+                                echo $vocaoptions;
                                 ?>
                             </select>
                             <span class="required">*</span></div>
                         <div class="form-group">
                             <select name="targeted_referral_partners[2]" data-name="industries" class="form-control select2 signup select2-hidden-accessible target_referrals"
-                                     placeholder="Select your referral vocation..." data-class="form-large" tabindex="-1" aria-hidden="true">
+                                    placeholder="Select your referral vocation..." data-class="form-large" tabindex="-1" aria-hidden="true">
                                 <option value="null">Select your referral vocation...</option>
                                 <?php
-                               echo $vocaoptions ;
+                                echo $vocaoptions;
                                 ?>
                             </select>
 
                         </div>
                         <div class="form-group">
                             <select name="targeted_referral_partners[3]" data-name="industries" class="form-control select2 signup select2-hidden-accessible target_referrals"
-                                     placeholder="Select your referral vocation..." data-class="form-large" tabindex="-1" aria-hidden="true">
+                                    placeholder="Select your referral vocation..." data-class="form-large" tabindex="-1" aria-hidden="true">
                                 <option value="null">Select your referral vocation...</option>
                                 <?php
-                                echo $vocaoptions ;
+                                echo $vocaoptions;
                                 ?>
                             </select>
 
@@ -767,7 +767,7 @@ foreach ($groups as $group)
             </div>
         </div>
     </section>
-	
+
     <section id="sec_nine" class="next-sections form-large">
         <div class="container">
             <div class="row">
@@ -872,19 +872,19 @@ foreach ($groups as $group)
         }
     </script>
 
-	<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/5a7df79c4b401e45400cd301/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/5a7df79c4b401e45400cd301/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
 
 
 <?php include("footer.php") ?>

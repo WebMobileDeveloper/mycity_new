@@ -2,7 +2,7 @@
 date_default_timezone_set('America/Los_Angeles');
 set_time_limit(60*10);
 
-session_start();
+if(!isset($_SESSION))session_start();
 include_once 'db.php';
 include_once 'functions.php';
 

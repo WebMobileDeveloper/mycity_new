@@ -42,7 +42,7 @@ if($_POST['btn_signup'] == 'signup')
 		}
 		else 
 		{
-			$msg = "Your account already exists. <br/>Please <a href='https://mycity.com/login'>login</a> instead!";
+			$msg = "Your account already exists. <br/>Please <a href='<?php echo BASE_URL;?>/login'>login</a> instead!";
 		} 
 	} 	 
 }

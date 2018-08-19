@@ -21,7 +21,8 @@ class Dashboard extends CI_Controller
 		{
 			//delete_cookie('_mcu');
 		    //$this->session->sess_destroy();
-			redirect('/admin/dashboard.php', 'refresh');
+//			redirect('/admin/dashboard.php', 'refresh');
+            header("Location: /admin/dashboard.php");
 		}
 		
 		$pagedata['base'] = $this->config->item('base_url');

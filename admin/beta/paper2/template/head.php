@@ -1,7 +1,7 @@
 <?php
 
     include_once 'includes/functions.php';
-    session_start();
+if(!isset($_SESSION))session_start();
     date_default_timezone_set('America/Los_Angeles');
     $tagline = getPageDetails("tagline"); 
     if( isset( $_COOKIE['_mcu'] ) )

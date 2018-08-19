@@ -1,11 +1,15 @@
 <?php
-session_start();
-if ($_SERVER['SERVER_NAME']=='localhost') {
-    define("ENVIRONMENT", "development");
-    define("BASE_URL", "http://localhost:81");
-} else {
-    define("ENVIRONMENT", "production");
-    define("BASE_URL", "https://mycity.com");
+if(!isset($_SESSION))session_start();
+if (!defined('ENVIRONMENT')) {
+    if ($_SERVER['SERVER_NAME'] == 'localhost') {
+        define("ENVIRONMENT", "development");
+        if (!defined('BASE_URL')) define("BASE_URL", "http://localhost");
+        if (!defined('ADMIN_BASE_URL')) define("ADMIN_BASE_URL", "http://localhost/admin");
+    } else {
+        define("ENVIRONMENT", "production");
+        if (!defined('BASE_URL')) define("BASE_URL", "https://mycity.com");
+        if (!defined('ADMIN_BASE_URL')) define("ADMIN_BASE_URL", "https://mycity.com/admin");
+    }
 }
 include_once 'includes/db.php';
 

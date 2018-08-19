@@ -10,7 +10,7 @@ include_once 'includes/functions.php';
 
 if(  $_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "mycity.dev")
 {
-    $siteurl = 'http://'. $_SERVER['SERVER_NAME'] . "/";
+    $siteurl = 'http://'. $_SERVER['HTTP_HOST'] . "/";
 } 
 else
 {

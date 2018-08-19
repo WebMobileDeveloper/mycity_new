@@ -1,6 +1,6 @@
 <?php
-session_start(); 
-date_default_timezone_set('America/Los_Angeles'); 
+if(!isset($_SESSION))session_start();
+date_default_timezone_set('America/Los_Angeles');
 include_once '../includes/db.php';
  
     //~4mcx9c3b1830513cc3b11138fc4b76635d32e692

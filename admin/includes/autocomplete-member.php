@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-	session_start();
+if(!isset($_SESSION))session_start();
 	include_once 'db.php';
 	$user_id = @$_SESSION['user_id'];
     $user_role =  $_SESSION['user_role'];

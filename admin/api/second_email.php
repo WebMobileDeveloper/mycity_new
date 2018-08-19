@@ -100,7 +100,7 @@ If you would like more information please call, text or email me<br/>
 </html>";
  
 	$param = array('interval' => '4' ); 
-	$signups = json_decode( curlexecute($param,   'https://mycity.com/api/api.php/signups/new/'), true); 
+	$signups = json_decode( curlexecute($param,   BASE_URL.'/api/api.php/signups/new/'), true);
 	 
 	$headers = "From:  bob@mycity.com \r\n" . "Cc: " . $cc . "\n";
 	$headers .= "Reply-To: bob@mycity.com\r\n";

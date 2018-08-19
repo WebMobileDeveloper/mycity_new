@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-	session_start();
+if(!isset($_SESSION))session_start();
 	include_once 'db.php'; 
    
 	$searchTerm = $_GET['phrase'];

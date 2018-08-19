@@ -104,7 +104,7 @@ If you would like more information please call, text or email me<br/>
 	$datee = date("Y-m-d H:i:s", strtotime("+30 minutes")); 
   
 	$param = array('dates' =>  $dates, 'datee' =>  $datee ); 
-	$reminders = json_decode( curlexecute($param, 'https://mycity.com/api/api.php/reminders/getall/'), true);
+	$reminders = json_decode( curlexecute($param, BASE_URL.'/api/api.php/reminders/getall/'), true);
   
    
 	$headers = "From:  bob@mycity.com \r\n" . "Cc: " . $cc . "\n";
@@ -126,7 +126,7 @@ If you would like more information please call, text or email me<br/>
 		{
 			//update mail has been sent 
 			 $param = array('remid' =>  $item['id']   ); 
-			$reminders = json_decode( curlexecute($param,   'https://mycity.com/api/api.php/reminder/markalerted/'), true); 
+			$reminders = json_decode( curlexecute($param,   BASE_URL.'/api/api.php/reminder/markalerted/'), true);
 		}  
 	endforeach; 
 	

@@ -273,7 +273,7 @@ class Profile extends CI_Controller
                     }
                     /* login ends */
                 } else {
-                    $msg = "Your account already exists. <br/>Please <a href='https://mycity.com/login'>login</a> instead!";
+                    $msg = "Your account already exists. <br/>Please <a href='".BASE_URL."/login'>login</a> instead!";
                 }
             }
         }

@@ -3,7 +3,7 @@
 if(  $_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "mycity.test")
 {
 	$_SERVER['HTTPS'] = false;
-    $siteurl = 'http://'. $_SERVER['SERVER_NAME'] . "/";
+    $siteurl = 'http://'. $_SERVER['HTTP_HOST'] . "/";
 } 
 else
 {
@@ -54,7 +54,7 @@ $connectreceived = json_decode(   curlexecute($param, $siteurl . 'api/api.php/ma
 					}
 				?> 
 				<a id="play-video" href='#watch-mycity-video' class='noborder watchvideo' data-toggle="modal" data-target="#videomodal"  data-video='zUzISiLmqMw' class='play-video-home'>
-				<img src='/images/bob-profile-sm.png' class='profile'  />
+				<img src='images/bob-profile-sm.png' class='profile'  />
 				</a>
         </div>
 			</div>
@@ -121,8 +121,8 @@ $connectreceived = json_decode(   curlexecute($param, $siteurl . 'api/api.php/ma
 
 						 $messagebubbletext = '';
 						 $connectioncount =0;
-						 if( $oldconnectreceived[0]['count'] > 0) 
-							$connectioncount = $oldconnectreceived[0]['count'];
+//						 if( $oldconnectreceived[0]['count'] > 0)
+//							$connectioncount = $oldconnectreceived[0]['count'];
 						 
 						 if( $connectreceived[0]['count'] > 0)    
 							$connectioncount += $connectreceived[0]['count'];

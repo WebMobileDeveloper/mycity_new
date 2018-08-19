@@ -23,9 +23,9 @@
 	
   
 	$param = array('goto' => '1' );
-	$signups = json_decode( curlexecute($param,   'https://mycity.com/api/api.php/signups/incomplete/'), true);
+	$signups = json_decode( curlexecute($param,   BASE_URL.'/api/api.php/signups/incomplete/'), true);
 	$param = array('mailtype' => '5' ); 
-	$mailtemplates = json_decode( curlexecute($param,   'https://mycity.com/api/api.php/getemailtemplatebytype/'), true); 
+	$mailtemplates = json_decode( curlexecute($param,   BASE_URL.'/api/api.php/getemailtemplatebytype/'), true);
 	
 	$headers = "From:  bob@mycity.com \r\n"  ; 
 	$headers .= "Reply-To: bob@mycity.com\r\n";
