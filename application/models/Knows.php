@@ -1304,6 +1304,7 @@ public function search_nearest($data)
 		$result = $this->db->get();
 		return $result;
 	} 
+
 	function get_top_rated_knows($data)
 	{
 		$ranking = $data['ranking'];   
@@ -1319,7 +1320,7 @@ public function search_nearest($data)
 		$result_count = $this->db->query($sql_query_count); 
 		$pages = $result_count->row()->reccnt ;
 		$jsonresult = array('error' =>  '0' , 'num_rows' =>  $pages,   'errmsg' =>  "Top rated knows fetched successfully" , 
-		'results' =>  $allknows  ); 
+		'results' =>  $allknows );
 		return $jsonresult; 
 	}
 	

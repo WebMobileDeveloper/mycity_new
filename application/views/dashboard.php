@@ -6,10 +6,7 @@
 		$id =  $row->id; 
 		$username = $row->username;
 		$user_id =  $row->id;
-		$_user_role	= $row->user_role;	
-		
-	 
-		 
+		$_user_role	= $row->user_role;
 	?>
 	   	 
 <div class='col-md-9'> 

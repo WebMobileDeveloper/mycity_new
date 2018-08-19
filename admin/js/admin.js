@@ -2587,6 +2587,8 @@ $(document).on('click', '.pagination.ratedknows li a', function () {
     var page = $(this).attr('data-page');
     showratedknows(memberid, page)
 })
+
+
 function showratedknows(memberid, page = 1) {
 
     waitFunc('enable');

@@ -997,10 +997,10 @@ class Dashboard extends CI_Controller
 		}
 		$uid = $this->session->id;
 		
-		if(  $this->session->role != 'admin' )
-		{
-			redirect('/dashboard', 'refresh'); 
-		}
+//		if(  $this->session->role != 'admin' )
+//		{
+//			redirect('/dashboard', 'refresh');
+//		}
 		$role = $this->session->role;
 		
 		$action =  $this->uri->segment(3);    
@@ -1111,26 +1111,71 @@ class Dashboard extends CI_Controller
 		
 		$rated_knows =$this->Knows->get_top_rated_knows(  array('ranking' => '25' ,  'offset' => $offset )   );  
 		$pagedata['rated_knows'] = $rated_knows; 
-		$pagedata['offset'] = $offset; 
-		$pager_config['base_url'] = $this->config->item('base_url') . 'dashboard/top-rated-knows/' ;	 
-		$pager_config['per_page'] = 10; 
-		$pager_config['full_tag_open'] = "<ul class='pagination'>";
-		$pager_config['full_tag_close'] ="</ul>";
-		$pager_config['num_tag_open'] = '<li>';
-		$pager_config['num_tag_close'] = '</li>';
+		$pagedata['offset'] = $offset;
+		$pager_config['base_url'] = $this->config->item('base_url') . 'dashboard/top-rated-knows/' ;
+        $pager_config['total_rows'] = $rated_knows['num_rows'];
+		$pager_config['per_page'] = 10;
+		$pager_config['uri_segment'] = 3;
+        // custom paging configuration
+        $pager_config['num_links'] = 5;
+        $pager_config['use_page_numbers'] = TRUE;
+        $pager_config['reuse_query_string'] = TRUE;
+
+//		$pager_config['full_tag_open'] = "<ul class='pagination'>";
+//		$pager_config['full_tag_close'] ="</ul>";
+//
+//		$pager_config['num_tag_open'] = '<li>';
+//		$pager_config['num_tag_close'] = '</li>';
+//
+//		$pager_config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+//		$pager_config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+//
+//		$pager_config['next_tag_open'] = "<li>";
+//		$pager_config['next_tagl_close'] = "</li>";
+//
+//		$pager_config['prev_tag_open'] = "<li>";
+//		$pager_config['prev_tagl_close'] = "</li>";
+//
+//		$pager_config['first_tag_open'] = "<li>";
+//		$pager_config['first_tagl_close'] = "</li>";
+//
+//		$pager_config['last_tag_open'] = "<li>";
+//		$pager_config['last_tagl_close'] = "</li>";
+
+
+        $pager_config['full_tag_open'] = "<ul class='pagination'>";
+        $pager_config['full_tag_close'] = "</ul>";
+        $pager_config['cur_page'] = $offset+1;
+        $pager_config['anchor_class'] = "page";
+
+        $pager_config['first_link'] = '&Lt;';
+        $pager_config['first_tag_open'] = '<li>';
+        $pager_config['first_tag_close'] = '</li>';
+
+        $pager_config['last_link'] = '&Gt;';
+        $pager_config['last_tag_open'] = '<li class="lastlink">';
+        $pager_config['last_tag_close'] = '</li>';
+
+        $pager_config['next_link'] = '&gt;';
+        $pager_config['next_tag_open'] = '<li class="nextlink">';
+        $pager_config['next_tag_close'] = '</li>';
+
+        $pager_config['prev_link'] = '&lt;';
+        $pager_config['prev_tag_open'] = '<li class="prevlink">';
+        $pager_config['prev_tag_close'] = '</li>';
+
 		$pager_config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
 		$pager_config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$pager_config['next_tag_open'] = "<li>";
-		$pager_config['next_tagl_close'] = "</li>";
-		$pager_config['prev_tag_open'] = "<li>";
-		$pager_config['prev_tagl_close'] = "</li>";
-		$pager_config['first_tag_open'] = "<li>";
-		$pager_config['first_tagl_close'] = "</li>";
-		$pager_config['last_tag_open'] = "<li>";
-		$pager_config['last_tagl_close'] = "</li>"; 
+
+        $pager_config['num_tag_open'] = '<li class="numlink">';
+        $pager_config['num_tag_close'] = '</li>';
+
+        $this->pagination->initialize($pager_config);
+        $pagedata["links"] = $this->pagination->create_custom_links();
+
 		$pagedata['pager_config'] = $pager_config ; 
-		$pagedata['knowid'] = $knowid; 
-		$this->load->view('template/head',   $pagedata); 
+		$pagedata['knowid'] = $knowid;
+		$this->load->view('template/head',   $pagedata);
 		$this->load->view('template/header',   $pagedata); 
 		$this->load->view('template/common_header',   $pagedata); 
 		$this->load->view('template/navigation_side',   $pagedata); 

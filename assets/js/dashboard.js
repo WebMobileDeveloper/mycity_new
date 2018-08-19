@@ -64,7 +64,6 @@ for(var i = 0; i < ca.length; i++)
 			_rmtoken = citem[1].trim();
 		}
     }
-	console.log(cvalue);
     if(typeof cvalue   === 'undefined' )
     { 
 

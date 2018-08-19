@@ -1,4 +1,9 @@
-RewriteEngine on 
+#ErrorDocument 503 "<h1>Site temporarily down for troubleshooting</h1>"
+
+#RewriteEngine On
+#RewriteRule .* - [R=503,L]
+
+RewriteEngine on
 RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
