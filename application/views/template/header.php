@@ -108,7 +108,7 @@ if ( !is_null( $this->input->cookie('_mcu') ))
 						
 						 if( $this->session->role =='user' || ($switcher == 'on' && $this->session->switcher == 'on') ) 
 						{
-							echo " <li><a href='" . BASE_URL  . "dashboard'><i   class='fa fa-home' title='Home'></i>";
+							echo " <li><a href='" . BASE_URL  . "/dashboard'><i   class='fa fa-home' title='Home'></i>";
 						}
 						else 
 						{

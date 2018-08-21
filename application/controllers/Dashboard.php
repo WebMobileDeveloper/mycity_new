@@ -1112,6 +1112,7 @@ class Dashboard extends CI_Controller
 		$rated_knows =$this->Knows->get_top_rated_knows(  array('ranking' => '25' ,  'offset' => $offset )   );  
 		$pagedata['rated_knows'] = $rated_knows; 
 		$pagedata['offset'] = $offset;
+
 		$pager_config['base_url'] = $this->config->item('base_url') . 'dashboard/top-rated-knows/' ;
         $pager_config['total_rows'] = $rated_knows['num_rows'];
 		$pager_config['per_page'] = 10;
@@ -1120,28 +1121,6 @@ class Dashboard extends CI_Controller
         $pager_config['num_links'] = 5;
         $pager_config['use_page_numbers'] = TRUE;
         $pager_config['reuse_query_string'] = TRUE;
-
-//		$pager_config['full_tag_open'] = "<ul class='pagination'>";
-//		$pager_config['full_tag_close'] ="</ul>";
-//
-//		$pager_config['num_tag_open'] = '<li>';
-//		$pager_config['num_tag_close'] = '</li>';
-//
-//		$pager_config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-//		$pager_config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-//
-//		$pager_config['next_tag_open'] = "<li>";
-//		$pager_config['next_tagl_close'] = "</li>";
-//
-//		$pager_config['prev_tag_open'] = "<li>";
-//		$pager_config['prev_tagl_close'] = "</li>";
-//
-//		$pager_config['first_tag_open'] = "<li>";
-//		$pager_config['first_tagl_close'] = "</li>";
-//
-//		$pager_config['last_tag_open'] = "<li>";
-//		$pager_config['last_tagl_close'] = "</li>";
-
 
         $pager_config['full_tag_open'] = "<ul class='pagination'>";
         $pager_config['full_tag_close'] = "</ul>";

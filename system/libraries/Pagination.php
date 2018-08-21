@@ -666,6 +666,7 @@ class CI_Pagination {
             $this->anchor_class = 'class="'.$this->anchor_class.'" ';
         }
 
+
         // If our item count or per-page total is zero there is no need to continue.
         if ($this->total_rows == 0 OR $this->per_page == 0)
         {
