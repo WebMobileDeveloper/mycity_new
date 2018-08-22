@@ -330,6 +330,10 @@ if ($member->num_rows() > 0):
                     <button type="submit" name="btn_updatename" value="create_account"
                             class="btn btn-block btn-create-account">Claim My Profile
                     </button>
+                    <div class="col-md-12" style="text-align: center;margin-top: 12px;margin-bottom: 40px;">
+                        <span style="color: red;">Alert: Stop here if you are already logging into your mycity profile!</span>
+                    </div>
+
                     <input type="hidden" id="claim_ajax_url" value="<?php echo $base; ?>claim"/>
                 </form>
                 <div class="form-group">
