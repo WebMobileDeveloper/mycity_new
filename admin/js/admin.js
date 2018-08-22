@@ -2368,6 +2368,49 @@ $(document).on('click', '.managezipcode', function () {
     });
 })
 
+$(document).on('click', '.updatepassword', function () {
+    $('#inputEmail').val('');
+    $('#inputPassword').val('');
+    $("html, body").animate({scrollTop: "170px"});
+})
+$(document).on('click', '#updatePassword', function () {
+
+
+    var email = $('#inputEmail').val();
+    var password = $('#inputPassword').val();
+
+    if (email == '') {
+        alertFunc('info', "Please input member's email address!");
+        return;
+    }
+    if (password == '') {
+        alertFunc('info', "Please input new password!");
+        return;
+    }
+    if (!confirm("Are you sure want to update this account's password?")) {
+        return;
+    }
+    waitFunc('enable');
+
+    $.ajax({
+        type: 'post',
+        url: aurl + 'member/updateforcepass/',
+        data: {email: email, password: password},
+        success: function (data) {
+            waitFunc('');
+            data = $.parseJSON(data);
+            if (data.error == 10 || data.error == 1) {
+                alertFunc('danger', data.errmsg)
+            }
+            else {
+                alertFunc('info', data.errmsg);
+                $('#inputEmail').val('');
+                $('#inputPassword').val('');
+            }
+        }
+    });
+
+});
 $(document).on('click', '.btnupdatelatlong', function () {
     var id = $(this).attr('data-id');
     var lat_old = $(this).attr('data-lat');

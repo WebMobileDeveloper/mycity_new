@@ -238,7 +238,6 @@ include_once('template/header.php');
                         </div>
                         <div class="panel-body panel-menu">
                             <ul id='peopleknow'>
-
                                 <?php if ($_user_role == 'admin') { ?>
                                     <li><a data-toggle="tab" href="#menu2" class='showknowentryform loadknowsormembers'><i class="fa fa-user-plus"></i>Add/Update Member</a></li>
                                     <li><a data-toggle="tab" class="btnviewhighrankknows" href="#menu60"><i class="fa fa-user-plus"></i>View Top Rated Know</a></li>
@@ -457,6 +456,7 @@ include_once('template/header.php');
                                     <li><a data-toggle="tab" title='Update distance between zip codes' class='managedistances' href="#menu55"><i class="fa fa-linkedin"></i> Update Distance</a></li>
                                     <li><a data-toggle="tab" title='Manage Fuzzy Search KeyWords' class='managefuzzysearch' href="#menu61"><i class="fa fa-cog"></i> Fuzzy Search Keyword</a></li>
                                     <li><a data-toggle="tab" title='Manage City Zip Codes' class='managezipcode' href="#menu64"><i class="fa fa-pencil"></i> Manage Zip Codes</a></li>
+                                    <li><a data-toggle="tab" title='Password Force update' class='updatepassword' href="#menu100"><i class="fa fa-unlock"></i> Password Force update</a></li>
                                 <?php } ?>
                             </ul>
                         </div>
@@ -1815,6 +1815,33 @@ include_once('template/header.php');
                                             </div>
                                         </div>
                                         <!-- menu64 -->
+                                        <!-- menu100-->
+                                        <div id="menu100" class="tab-pane maintab">
+                                            <div class="col-xs-12 col-md-12">
+                                                <h4>Force Password Update </h4>
+                                                <hr/>
+                                            </div>
+
+
+                                            <div class="col-xs-12 col-sm-6 col-md-6" style="margin-top:20px;">
+                                                <form>
+                                                    <div class="form-group row">
+                                                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                                        </div>
+                                                    </div>
+                                                    <a class="btn btn-primary" id="updatePassword" style="margin-left: 94px; margin-top: 10px;">Update Password</a>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- menu100 -->
 
                                         <!-- menu66-->
                                         <div id="menu66" class="tab-pane maintab fade">
@@ -4315,6 +4342,11 @@ include_once('template/header.php');
                 </div>
             </div>
         </div>
+        <style>
+            .col-form-label{
+                line-height:40px;
+            }
+        </style>
         <?php
         include_once('template/footer.php');
         ?>
