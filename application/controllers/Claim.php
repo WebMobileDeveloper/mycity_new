@@ -21,36 +21,31 @@ class Claim extends CI_Controller
 
     public function index()
     {
-        $first_name = $this->input->post("first_name");
-        $last_name = $this->input->post('last_name');
-        $email = $this->input->post('email');
+        $email = $this->input->post("email_input");
+        $username_input = $this->input->post('username_input');
+        $user_shortcode = $this->input->post('user_shortcode');
         $password = $this->randomPassword();
         $sender_email = "referralsmycity@gmail.com";
-        $subject = "Account created!";
+        $subject = "Claim profile succuss!";
 
-
-        $name = $first_name . " " . $last_name;
-        $data = array('username' => $name, 'user_email' => $email, 'user_pass' => md5($password));
+        $data = array('email' => $email, 'password' => md5($password));
         $this->load->model("Members");
 
-        if ($this->Members->check_duplicate($email)) {
-            echo 'Email you provided has an account already.';
-            return;
-        } else {
-            $reg_id = $this->Members->add($data);
-            $mailbody = "<p>Hi</p>
+        $reg_id = $this->Members->claim_profile($data);
+        $mailbody = "<p>Hi, ".ucwords($username_input)."</p>
 
-            <p>You recently signed up in MyCity.com using the email - " . $email . " . You can login with below password.</p>
-            <p><b>Your password: </b>" . $password . "</p>
-            Visit MyCity : <a href='" . $this->config->item('base_url') . "login' target='_blank'>" . $this->config->item('base_url') . "</a>
-            <p>Sincerely,<br />
-            Bob Friedenthal<br />
-            Bob@mycity.com<br />
-            310-736-5787</p>
-            ";
-            send_email($email, $sender_email,
-                "MyCity", $subject, $mailbody);
-            echo "success";
-        }
+        <p>You recently claim up MyCity.com profile with " . $email . " . You can login with below password.</p>
+        <p><b>Your password: </b>" . $password . "</p>
+        Visit MyCity website : <a href='" . $this->config->item('base_url') . "login' target='_blank'>" . $this->config->item('base_url') . "</a>
+        <p>Sincerely,<br />
+        Bob Friedenthal<br />
+        Bob@mycity.com<br />
+        310-736-5787</p>
+        ";
+        send_email($email, $sender_email,
+//        send_email('vladdragonsun@gmail.com', $sender_email,
+            "MyCity", $subject, $mailbody);
+        echo "success";
+
     }
 }

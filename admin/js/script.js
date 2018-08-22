@@ -8427,7 +8427,8 @@ $(document).on('click', '.btn-gsearch', function()
     }); 
  
 	searchratedmembers(keyword , gscityorzip );
-})
+});
+
 
  $(document).on('click', '.pagination.knowgslist li a', function()
 {

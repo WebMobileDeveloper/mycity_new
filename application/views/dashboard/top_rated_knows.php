@@ -1,6 +1,40 @@
 <div class='col-md-9'>
     <div class='profile-item'>
-        <h4>Top Rated Knows</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Top Rated Knows</h4>
+            </div>
+            <div class="col-md-6">
+                <?php
+                $form_option = array('id' => 'rating25_search');
+                echo form_open('dashboard/top_rated_knows', $form_option); ?>
+                <div class="top-search">
+                    <div class="top-search-inner">
+                        <div class="easy-autocomplete" style="width: 183px;">
+                            <input type="text" name='name_profession' id="name_profession" placeholder="Name or Profession" autocomplete="off"
+                            value="<?php echo $name_profession;?>">
+                            <div class="easy-autocomplete-container" id="eac-container-gskey">
+                                <ul style="display: none;"></ul>
+                            </div>
+                        </div>
+                        <div class="easy-autocomplete" style="width: 183px;">
+                            <input type="text" name="search_email" id="search_email" placeholder="Email" autocomplete="off"
+                                   value="<?php echo $search_email;?>">
+                            <div class="easy-autocomplete-container" id="eac-container-gscityorzip">
+                                <ul></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type='submit' name='btn-toprate-search' value='btn-toprate-search' class="btn-top-rate-search"><i class="fa fa-search"></i></button>
+
+                    <div class="clearer"></div>
+                </div>
+                <?php echo form_close(); ?>
+            </div>
+        </div>
+
+
         <div class='hr-sm '></div>
         <?php
         $html = "<table class='table table-responsive'>";
@@ -16,9 +50,9 @@
                 "</tr>";
         }
         $html .= "</table>";
-        if (isset($links)) echo "<div style='text-align: center;'>".$links."</div>";
+        if (isset($links)) echo "<div style='text-align: center;'>" . $links . "</div>";
         echo $html;
-        if (isset($links)) echo "<div style='text-align: center;'>".$links."</div>";
+        if (isset($links)) echo "<div style='text-align: center;'>" . $links . "</div>";
 
         ?>
 
@@ -81,4 +115,18 @@
 
 </div>
 </div> <!-- row -->
-</div> <!-- container -->  
+</div> <!-- container -->
+<style>
+    .profile-item .top-search {
+        border: solid 1px #d7d3d380;
+        margin: 10px;
+    }
+
+    .btn-top-rate-search {
+        border: none;
+        margin-top: -4px;
+        float: right;
+        margin-right: 5px;
+        background-color: #fff;
+    }
+</style>

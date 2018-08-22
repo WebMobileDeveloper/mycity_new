@@ -2384,44 +2384,24 @@ $(function () {
 
     $('#newModalForm').submit(function (event) {
         event.preventDefault();
-        var first_name = $('#first_name').val();
-        var last_name = $('#last_name').val();
-        var email = $('#email').val();
-		var ajax_url = $('#ajax_url').val();
-        $('.first_name_message').html('');
-        $('.last_name_message').html('');
-        $('.email_message').html('');
+        var email_input = $('#email_input').val();
+        var username_input = $('#username_input').val();
+        var user_shortcode = $('#user_shortcode').val();
+        var claim_ajax_url = $('#claim_ajax_url').val();
 
-        if (first_name == "") {
-            $('.first_name_message').html('Input your first name.');
-            return;
-        }
-        if (last_name == "") {
-            $('.last_name_message').html('Input your last name.');
-            return;
-        }
-        if (email == "") {
-            $('.email_message').html('Input your email address.');
-            return;
-        }
-
-        if (!validateEmail(email)) {
-            $('.email_message').html('Input your valid email address.');
-            return;
-        }
 
         $.ajax({
             type: 'POST',
-            url: ajax_url,
+            url: claim_ajax_url,
             data: {
-                'first_name': first_name,
-                'last_name': last_name,
-                'email': email
+                'email_input': email_input,
+                'username_input': username_input,
+                'user_shortcode': user_shortcode
             },
             dataType: 'html',
             success: function (result) {
                 if (result == "success") {
-                    $('.modal-body').html("Confirm sent to '"+ email+"' successfully.");
+                    $('.modal-body').html("Confirm email sent to your email successfully.");
                     return false;
                 }else{
                     $('.email_message').html(result);

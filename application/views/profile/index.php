@@ -10,7 +10,8 @@ if ($member->num_rows() > 0):
     $memberid = $row->id;
     $user_picture = ((file_exists($profile_img . $row->image)) ? $base . $profile_img . $row->image : $base . $image . "no-photo.png");
     ?>
-<!--    <pre>    --><?php //print_r($row); ?><!--</pre>-->
+    <!--    <pre>    --><?php //print_r($row);
+    ?><!--</pre>-->
     <div class="container">
         <div class='row'>
             <?php
@@ -24,10 +25,7 @@ if ($member->num_rows() > 0):
             <div class='col-md-9'>
                 <div class="profile-summary">
                     <div id="profile" class="profile">
-                        <?php if ($uid == 0) { ?>
-                            <button class='btn claim-button'>Claim your profile</button>
-                        <?php }
-                        ?>
+                        <button class='btn claim-button'>Claim Profile</button>
                         <div class='row'>
                             <div class='col-md-8'>
                                 <h1><?php echo ucwords($row->username); ?></h1>
@@ -314,6 +312,42 @@ if ($member->num_rows() > 0):
 </div>
 
 <div class="modal fade" id="claim_modal" tabindex="-1" role="dialog" aria-labelledby="claim_modal">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Claim Your Profile</h2>
+            </div>
+            <div class="modal-body modal-body-no-pad">
+                <form action="<?php echo $base; ?>claim" method="post" id="newModalForm">
+                    <h5>Is this your profile?</h5>
+                    <h5>Please check carefully and click Claim Profile button.</h5>
+                    <br/><br/>
+                    <input type="hidden" name="email_input" class="form-control" id="email_input" value="<?php echo $row->user_email; ?>">
+                    <input type="hidden" name="username_input" class="form-control" id="username_input" value="<?php echo $row->username; ?>">
+                    <input type="hidden" name="user_shortcode" class="form-control" id="user_shortcode" value="<?php echo $row->user_shortcode; ?>">
+                    <button type="submit" name="btn_updatename" value="create_account"
+                            class="btn btn-block btn-create-account">Claim My Profile
+                    </button>
+                    <input type="hidden" id="claim_ajax_url" value="<?php echo $base; ?>claim"/>
+                </form>
+                <div class="form-group">
+                    <br/>
+                    <p>By clicking "Create Account" you agree to the Mycity.com
+                        <a href="/terms-and-conditions" target="_blank">Terms of Services</a> and
+                        <a href="/privacy" target="_blank">Privacy Policy</a>.
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer clearfix">
+                <button data-dismiss="modal" class='btn btn-primary'>Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="claim_modal1" tabindex="-1" role="dialog" aria-labelledby="claim_modal">
     <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
