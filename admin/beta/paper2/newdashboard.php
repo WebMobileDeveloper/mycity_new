@@ -140,7 +140,7 @@ $my_profile =  json_decode(   curlexecute($param, $siteurl . 'api/api.php/member
 			<ul  id='peopleknow'>
 					<li><a data-toggle="tab" href="#menu2" ><i class="fa fa-user-plus"></i>Add/Update People</a></li>
 					<li><a data-toggle="tab" href="#menu25" class='loadimportedknows' ><i class="fa fa-users"></i> Manage Imported Knows</a>
-					<a href="<?php echo $help_d0ata_buttxsons[10]['helpvideo']; ?>" target="_blank" ><i id='hint-profile1' class='glyphicon glyphicon-arrow-right' ></i><span style="color:red;">Help</span></a>
+					<a href="<?php echo $help_data_buttons[10]['helpvideo']; ?>" target="_blank" ><i id='hint-profile1' class='glyphicon glyphicon-arrow-right' ></i><span style="color:red;">Help</span></a>
 					</li>  
 					<li><a data-toggle="tab" href="#menu24"  ><i class="fa fa-upload"></i> Mass Upload Your Knows</a></li> 
  				<li class="close_drop"><a data-toggle="tab" data-pagesize='10' data-pageno='1' class='showreferrals' href="#menu17" id='hint-addreferral'> <i class="fa fa-users"></i>Introduction/Referral</a>
@@ -165,7 +165,7 @@ $my_profile =  json_decode(   curlexecute($param, $siteurl . 'api/api.php/member
                     <h4>Direct Email Service</h4>
                 </div>
             <div class="panel-body">
-<ul  id='directmail'>
+                <ul  id='directmail'>
                    
                 <li class="close_drop"><a data-toggle="tab" class='btnviewalldmr' href="#menu49"> <i class="fa fa-users"></i> Search Members</a></li>
                     <li class="close_drop"><a data-toggle="tab" class='btnviewdmrequests' href="#menu50"> <i class="fa fa-envelope"></i> Requests Approved</a></li>

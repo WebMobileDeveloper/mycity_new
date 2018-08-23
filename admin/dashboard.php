@@ -438,7 +438,7 @@ include_once('template/header.php');
                                     <a href="<?php echo $help_data_buttons[3]['helpvideo']; ?>" target="_blank"><i class='fa fa-arrow-right'></i><span style="color:red;">Help</span></a>
                                 </li>
                                 <li><a data-toggle="tab" href="#menu25" class='loadimportedknows'><i class="fa fa-users"></i> Manage Imported Knows</a>
-                                    <a href="<?php echo $help_d0ata_buttxsons[10]['helpvideo']; ?>" target="_blank"><i id='hint-profile1' class='fa fa-arrow-right'></i><span
+                                    <a href="<?php echo $help_data_buttons[10]['helpvideo']; ?>" target="_blank"><i id='hint-profile1' class='fa fa-arrow-right'></i><span
                                                 style="color:red;">Help</span></a>
                                 </li>
                                 <li><a data-toggle="tab" href="#menu24"><i class="fa fa-upload"></i> Mass Upload Your Knows</a></li>

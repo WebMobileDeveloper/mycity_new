@@ -343,7 +343,10 @@ function getAutoSuggestedMembers($userid, $goto, $vocations = '', $name = '', $c
                 });
                 $final = array();
                 for ($i = 0; $i < 10; $i++) {
-                    $final[] = $allmembers[$start + $i];
+                    if (isset($allmembers[$start + $i])) {
+                        $final[] = $allmembers[$start + $i];
+                    }
+
                 }
 
                 $jsonresult = array('error' => '0', 'path' => $user_picture, 'pages' => $pages, 'errmsg' => 'Members you may be interested to contact found!', 'results' => $final);

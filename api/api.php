@@ -1789,8 +1789,8 @@ $app->post('/member/searchnearest/', function (Request $request, Response $respo
     $iszip = $allPostPutVars['iszip'];
     $vocation = $allPostPutVars['vocation'];
     $page = $allPostPutVars['page'];
+    $memberids = $allPostPutVars['searched_members'];
     $utype = $allPostPutVars['utype'];
-
 
     $where_member_ids = array();
     $pagesize = 10;
@@ -1817,7 +1817,7 @@ $app->post('/member/searchnearest/', function (Request $request, Response $respo
             $knowwhere_city = " ( FIND_IN_SET('" . implode("',  client_location ) OR FIND_IN_SET('", $cities) . "',  client_location ) )  and";
         }
     }
-
+    $where_vocations = '';
     if ($vocation != '') {
         $keys = explode(",", $vocation);
         $where_vocations = " or ( FIND_IN_SET('" . implode("',  vocations ) OR FIND_IN_SET('", $keys) . "',  vocations ) ) ";
@@ -1842,70 +1842,91 @@ $app->post('/member/searchnearest/', function (Request $request, Response $respo
         $pdo = getPDO($this);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+        if ($utype == 1) {
+            $sql_query_ids = " select a.id as ui from mc_user as a inner join  user_details  as b on a.id=b.user_id  where $where_city a.id <> '1' and a.id <> '$userid' and ( a.username like '%$keyword%'  $where_vocations )   ";
 
-        $sql_query_ids = " select a.id as ui from mc_user as a inner join  user_details  as b on a.id=b.user_id  where $where_city a.id <> '1' and a.id <> '$userid' and ( a.username like '%$keyword%'  $where_vocations )   ";
-
-        $rst = $pdo->query($sql_query_ids);
-        if ($rst->rowCount() > 0) {
-            $member_ids = $rst->fetchAll(PDO::FETCH_ASSOC);
-            $ids = array();
-            foreach ($member_ids as $row) {
-                $where_member_ids[] = $row["ui"];
-            }
-        }
-
-
-        $sql_query = " select a.id as ui, 0 knid  , user_email as a, username  as b, user_role  as c, user_pkg  as d, user_phone  as e,  image  as f,  busi_name  as g,  user_type  as h, " .
-            " busi_location_street  as i,  busi_location  as j,  busi_type  as k,  busi_hours  as l, busi_website  as m, current_company  as n, linkedin_profile  as o, " .
-            " street  as p, city  as q, zip  as r, country  as s,  groups  as t,  target_clients  as u, target_referral_partners  as v, vocations  as w, about_your_self  as x , " .
-            " 0 as isconnected, 0 as rating from mc_user as a inner join  user_details  as b on a.id=b.user_id  " .
-            " where $where_city a.id <> '1' and a.id <> '$userid' and ( a.username like '%$keyword%'  $where_vocations )  order by username  limit $start, $pagesize ";
-
-        $sql_query_count = "select count(*) as reccnt from mc_user as a inner join  user_details  as b on a.id=b.user_id  " .
-            " where $where_city a.id <> '1' and a.id <> '$userid' and ( a.username like '%$keyword%'  $where_vocations ) ";
-
-        $rst = $pdo->query($sql_query);
-        $membercount = $rst->rowCount();
-
-        $memberids = array();
-        if ($membercount > 0) {
-
-            $members = $rst->fetchAll(PDO::FETCH_ASSOC);
-
-            for ($i = 0; $i < $rst->rowCount(); $i++) {
-                $sp = $members[$i][ui];
-                $memberids[] = $sp;
-                $query_connect_check = " select * from mc_member_connections where  status='1' and (  ( firstpartner='$userid' and secondpartner='$sp')  or ( firstpartner='$sp' and secondpartner='$userid') ) ";
-
-                $rstconcheck = $pdo->query($query_connect_check);
-                if ($rstconcheck->rowCount() > 0) {
-                    $members[$i][isconnected] = '1';
+            $rst = $pdo->query($sql_query_ids);
+            if ($rst->rowCount() > 0) {
+                $member_ids = $rst->fetchAll(PDO::FETCH_ASSOC);
+                $ids = array();
+                foreach ($member_ids as $row) {
+                    $where_member_ids[] = $row["ui"];
                 }
+            }
 
-                //calculating average rating
-                $query_avg_rating = "select sum(ranking) as ranking from mc_user_rating where  user_id='$sp' group by rated_by ";
-                $avgraters = $pdo->query($query_avg_rating);
-                if ($avgraters->rowCount() > 0) {
-                    $avgrate = 0;
-                    $count = 0;
-                    foreach ($avgraters as $ritem) {
-                        $avgrate += $ritem['ranking'];
-                        $count++;
+
+            $sql_query = " select a.id as ui, 0 knid  , user_email as a, username  as b, user_role  as c, user_pkg  as d, user_phone  as e,  image  as f,  busi_name  as g,  user_type  as h, " .
+                " busi_location_street  as i,  busi_location  as j,  busi_type  as k,  busi_hours  as l, busi_website  as m, current_company  as n, linkedin_profile  as o, " .
+                " street  as p, city  as q, zip  as r, country  as s,  groups  as t,  target_clients  as u, target_referral_partners  as v, vocations  as w, about_your_self  as x , " .
+                " 0 as isconnected, r.rating as rating from mc_user as a
+            left join (select user_id, sum(ranking)/count(DISTINCT(rated_by)) as rating from mc_user_rating  group by user_id) as r on a.id = r.user_id
+            inner join  user_details  as b on a.id=b.user_id  
+            " .
+                " where $where_city a.id <> '1' and a.id <> '$userid' and ( a.username like '%$keyword%'  $where_vocations )  
+            order by rating desc, username  limit $start, $pagesize ";
+
+            $sql_query_count = "select count(*) as reccnt from mc_user as a inner join  user_details  as b on a.id=b.user_id  " .
+                " where $where_city a.id <> '1' and a.id <> '$userid' and ( a.username like '%$keyword%'  $where_vocations ) ";
+
+            $rst = $pdo->query($sql_query);
+            $membercount = $rst->rowCount();
+
+            $memberids = array();
+            if ($membercount > 0) {
+
+                $members = $rst->fetchAll(PDO::FETCH_ASSOC);
+
+                for ($i = 0; $i < $rst->rowCount(); $i++) {
+                    $sp = $members[$i]['ui'];
+                    $memberids[] = $sp;
+                    $query_connect_check = " select * from mc_member_connections where  status='1' and (  ( firstpartner='$userid' and secondpartner='$sp')  or ( firstpartner='$sp' and secondpartner='$userid') ) ";
+
+                    $rstconcheck = $pdo->query($query_connect_check);
+                    if ($rstconcheck->rowCount() > 0) {
+                        $members[$i]['isconnected'] = '1';
                     }
-                    if ($count > 0)
-                        $members[$i][rating] = $avgrate / $count;
                 }
+                //loggin search keyword
+                $rst_count = $pdo->query($sql_query_count);
+                $result_count = $rst_count->fetchAll(PDO::FETCH_ASSOC);
+                $pages = ceil($result_count[0]['reccnt'] / 10);
+                $jsonresult = array('pages' => $pages, 'result' => $members, 'msg1' => 'Member fetched successfully!');
             }
-            //loggin search keyword
-            $memberrating = usort($members, memberrating);
-            $rst_count = $pdo->query($sql_query_count);
-            $result_count = $rst_count->fetchAll(PDO::FETCH_ASSOC);
-            $pages = ceil($result_count[0]['reccnt'] / 10);
-            $jsonresult = array('pages' => $pages, 'result' => $members, 'msg1' => 'Member fetched successfully!');
+            $memberids = implode(",", $memberids);
         }
 
         //loading knows
-        if ($membercount == 0) {
+        $knows = [];
+        if ($memberids != '') {
+            $wherememberid = " user_id  in ( " . $memberids . ") and ";
+            $membername = " and find_in_set('$keyword', client_profession) ";
+
+            //fetching knows
+            $sql_query = "select r.rating, k.user_id  as ui, r.rating as rating, k.id as knid , u.username as un, k.client_email as a  ,  k.client_name as b , 
+                    'na' c, 'na' d,  k.client_phone as e, 'na' f, 
+                    'na' g, 'na' h, 'na' i, 'na' j,  'na' k, 'na' l,  'na' m, 'na' n, 
+                    'na' o, 'na'  p,  k.client_location as q,  k.client_zip as r, 'na'  s, 
+                    'na' t, 'na'  u, 'na'  v, k.client_profession as w, 'na'  x ,  0 as isconnected  
+                    from  user_people as k
+                    left join (select user_id as r_user_id, sum(ranking) as rating from user_rating  group by user_id) as r on k.id = r_user_id
+                    inner join mc_user as u on k.user_id=u.id  where $wherememberid " .
+                " (find_in_set('Rated 25', k.tags) or  find_in_set('Rated 6 Need to Contact', k.tags) ) order by rating desc limit $start, $pagesize ";
+
+            $sql_query_count = "select count(*) as reccnt from  user_people  where $wherememberid " .
+                " (find_in_set('Rated 25', tags) or  find_in_set('Rated 6 Need to Contact', tags) ) ";
+
+
+            $rst_count = $pdo->query($sql_query_count);
+            $result_count = $rst_count->fetchAll(PDO::FETCH_ASSOC);
+            $pages = ceil($result_count[0]['reccnt'] / 10);
+            $jsonresult['know_pages'] = $pages;
+            $rst = $pdo->query($sql_query);
+
+            if ($rst->rowCount() > 0) {
+                $knows = $rst->fetchAll(PDO::FETCH_ASSOC);
+            }
+
+        } else {
             $wherememberid = "";
             $jsonresult = array('pages' => '0', 'result' => '', 'msg1' => 'No matching members found!');
 
@@ -1916,50 +1937,14 @@ $app->post('/member/searchnearest/', function (Request $request, Response $respo
             } else {
                 $membername = " and find_in_set('$keyword', client_profession) ";
             }
-        } else {
-            $wherememberid = " user_id  in ( " . implode(",", $memberids) . ") and ";
-            $membername = " and find_in_set('$keyword', client_profession) ";
         }
         if ($keyword == '') {
             $membername = " ";
         }
 
-        //fetching knows
-        $sql_query = "select  k.user_id  as ui, k.id as knid , u.username as un, k.client_email as a  ,  k.client_name as b , 
-		'na' c, 'na' d,  k.client_phone as e, 'na' f, 
-		'na' g, 'na' h, 'na' i, 'na' j,  'na' k, 'na' l,  'na' m, 'na' n, 
-		'na' o, 'na'  p,  k.client_location as q,  k.client_zip as r, 'na'  s, 
-		'na' t, 'na'  u, 'na'  v, k.client_profession as w, 'na'  x ,  0 as isconnected, 0 as rating  
-		from  user_people as k inner join mc_user as u on k.user_id=u.id  where $wherememberid " .
-            " (find_in_set('Rated 25', k.tags) or  find_in_set('Rated 6 Need to Contact', k.tags) ) limit $start, $pagesize ";
 
-        $sql_query_count = "select count(*) as reccnt from  user_people  where $wherememberid " .
-            " (find_in_set('Rated 25', tags) or  find_in_set('Rated 6 Need to Contact', tags) ) ";
-
-
-        $rst_count = $pdo->query($sql_query_count);
-        $result_count = $rst_count->fetchAll(PDO::FETCH_ASSOC);
-        $pages = ceil($result_count[0]['reccnt'] / 10);
-        $jsonresult['know_pages'] = $pages;
-        $rst = $pdo->query($sql_query);
-
-        if ($rst->rowCount() > 0) {
-            $knows = $rst->fetchAll(PDO::FETCH_ASSOC);
-            for ($i = 0; $i < $rst->rowCount(); $i++) {
-                $know_id = $knows[$i][knid];
-                //calculating average rating
-                $query_know_rating = "  select sum(ranking) as total_rank from  user_rating  where user_id='$know_id' ";
-                $knowrating = $pdo->query($query_know_rating);
-                $know_rating = $knowrating->fetchAll(PDO::FETCH_ASSOC)[0]['total_rank'];
-                if (is_null($know_rating))
-                    $knows[$i][rating] = "0";
-                else
-                    $knows[$i][rating] = $know_rating;
-            }
-        }
         $know_result = array();
         if (sizeof($knows) > 0) {
-            $memberrating = usort($knows, memberrating);
             for ($i = 0; $i < $rst->rowCount() && $i < $pagesize; $i++) {
                 $know_result[] = $knows[$i];
             }
@@ -1967,9 +1952,10 @@ $app->post('/member/searchnearest/', function (Request $request, Response $respo
             $jsonresult['knows'] = $know_result;
             $jsonresult['msg2'] = 'Matching knows found!';
         } else {
-            $jsonresult['msg2'] = 'Matching knows not found!';
             $jsonresult['knows'] = '';
+            $jsonresult['msg2'] = 'Matching knows not found!';
         }
+
         $jsonresult['errmsg'] = 'Member fetched successfully!';
         $jsonresult['error'] = '0';
 
