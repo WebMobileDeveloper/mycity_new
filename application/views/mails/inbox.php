@@ -21,14 +21,14 @@
         
 		foreach(  $inbox['result']->result() as $item   )
 		{ 
-            if($item->emailstatus == 0)
+            if($item->emailstatus < 2)
 			{
 				$estate ='<span class="badge badge-primary">New</span>';
 				$bt ='strong';
 			} 
 			else 
 			{
-				$estate = ' ';
+				$estate = '    ';
 				$bt =' ';
 			} 
 		  echo "<tr  data-id='"  . $item->id   . "'   ><td><input type='checkbox' class='delmail' data-id='" . $item->id  . "'></td><td>" .  $estate . "</td><td class='" . $bt ."' data-id='"  .  $item->id  . "' class='readinmail'>" . 
@@ -44,12 +44,9 @@
 		  echo  "</td> ";
 		  echo "</tr>";      
         }  
-		echo '</table>';  
-		$pager_config['base_url'] = $this->config->item('base_url') . 'mails/inbox/' . $mailtype . "/" ;	 
-		$pager_config['total_rows'] = $inbox['num_rows'];
-		$this->pagination->initialize($pager_config); 
-		echo $this->pagination->create_links();
-		 
+		echo '</table>';
+        if (isset($links)) echo "<div style='text-align: center;'>" . $links . "</div>";
+
 		?>
 		</div>  
 	</div>  
