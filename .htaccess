@@ -1,4 +1,4 @@
-#ErrorDocument 503 "<h1>Site temporarily down for troubleshooting</h1>"
+#ErrorDocument 503 "<h1>Site temporarily down for Updating</h1>"
 
 #RewriteEngine On
 #RewriteRule .* - [R=503,L]

@@ -24,13 +24,13 @@ date_default_timezone_set('America/Los_Angeles');
 |
 */
 
-switch (ENVIRONMENT)
-{
+switch (ENVIRONMENT) {
     case 'development':
         $config['base_url'] = 'http://localhost/';
         $config['site_url'] = 'http://localhost/index.php/';
         define("BASE_URL", "http://localhost");
         define("ADMIN_BASE_URL", "http://localhost/admin");
+        $config['site_path'] = 'D:/www/mycity/';
         break;
     case 'testing':
         break;
@@ -39,6 +39,7 @@ switch (ENVIRONMENT)
         $config['site_url'] = 'https://mycity.com/index.php/';
         define("BASE_URL", "https://mycity.com");
         define("ADMIN_BASE_URL", "https://mycity.com/admin");
+        $config['site_path'] = DIRECTORY_SEPARATOR . 'home' . DIRECTORY_SEPARATOR . 'mycity29' . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR;
         break;
 
     default:
@@ -48,10 +49,9 @@ $config['asset'] = "assets/";
 $config['css'] = "assets/css/";
 $config['js'] = 'assets/js/';
 $config['image'] = 'assets/images/';
-$config['uploadpath'] =  'assets/uploads/profiles/';
-$config['profile_img'] =  'assets/uploads/profiles/';
-$config['fileuploadpath'] =  'assets/uploads/';
-$config['site_path'] =   DIRECTORY_SEPARATOR . 'home'. DIRECTORY_SEPARATOR . 'mycity29'. DIRECTORY_SEPARATOR . 'public_html'. DIRECTORY_SEPARATOR   ;
+$config['uploadpath'] = 'assets/uploads/profiles/';
+$config['profile_img'] = 'assets/uploads/profiles/';
+$config['fileuploadpath'] = 'assets/uploads/';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -79,7 +79,7 @@ $config['index_page'] = '';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= 'REQUEST_URI';
+$config['uri_protocol'] = 'REQUEST_URI';
 
 /*
 |--------------------------------------------------------------------------
@@ -103,7 +103,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language'] = 'english';
 
 /*
 |--------------------------------------------------------------------------
@@ -427,11 +427,11 @@ $config['sess_regenerate_destroy'] = FALSE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= '';
-$config['cookie_domain']	= '';
-$config['cookie_path']		= '/';
-$config['cookie_secure']	= FALSE;
-$config['cookie_httponly'] 	= FALSE;
+$config['cookie_prefix'] = '';
+$config['cookie_domain'] = '';
+$config['cookie_path'] = '/';
+$config['cookie_secure'] = FALSE;
+$config['cookie_httponly'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

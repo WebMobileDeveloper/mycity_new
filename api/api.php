@@ -1795,7 +1795,7 @@ $app->post('/member/searchnearest/', function (Request $request, Response $respo
     $where_member_ids = array();
     $pagesize = 10;
     $start = ($page - 1) * $pagesize;
-
+    $jsonresult = array();
     if ($city == "") {
         $where_city = '';
         $knowwhere_city = '';
@@ -1890,9 +1890,12 @@ $app->post('/member/searchnearest/', function (Request $request, Response $respo
                 $rst_count = $pdo->query($sql_query_count);
                 $result_count = $rst_count->fetchAll(PDO::FETCH_ASSOC);
                 $pages = ceil($result_count[0]['reccnt'] / 10);
-                $jsonresult = array('pages' => $pages, 'result' => $members, 'msg1' => 'Member fetched successfully!');
+                $jsonresult['pages']= $pages;
+                $jsonresult['result']= $members;
+                $jsonresult['msg1']= 'Member fetched successfully!';
             }
             $memberids = implode(",", $memberids);
+            $start = 0;
         }
 
         //loading knows
@@ -1902,7 +1905,7 @@ $app->post('/member/searchnearest/', function (Request $request, Response $respo
             $membername = " and find_in_set('$keyword', client_profession) ";
 
             //fetching knows
-            $sql_query = "select r.rating, k.user_id  as ui, r.rating as rating, k.id as knid , u.username as un, k.client_email as a  ,  k.client_name as b , 
+            $sql_query = "select r.rating, k.user_id  as ui, k.id as knid , u.username as un, k.client_email as a  ,  k.client_name as b , 
                     'na' c, 'na' d,  k.client_phone as e, 'na' f, 
                     'na' g, 'na' h, 'na' i, 'na' j,  'na' k, 'na' l,  'na' m, 'na' n, 
                     'na' o, 'na'  p,  k.client_location as q,  k.client_zip as r, 'na'  s, 
@@ -1927,21 +1930,10 @@ $app->post('/member/searchnearest/', function (Request $request, Response $respo
             }
 
         } else {
-            $wherememberid = "";
-            $jsonresult = array('pages' => '0', 'result' => '', 'msg1' => 'No matching members found!');
-
-            $rsnameorvoc = $pdo->query("SELECT * FROM `groups` where islisted='1' and grp_name='$keyword' ORDER BY `grp_name` ");
-
-            if ($rsnameorvoc->rowCount() == 0) {
-                $membername = " and client_name like '%$keyword%' ";
-            } else {
-                $membername = " and find_in_set('$keyword', client_profession) ";
-            }
+            $jsonresult['pages'] = 0;
+            $jsonresult['result'] = '';
+            $jsonresult['msg1'] = 'No matching members found!';
         }
-        if ($keyword == '') {
-            $membername = " ";
-        }
-
 
         $know_result = array();
         if (sizeof($knows) > 0) {

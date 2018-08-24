@@ -1004,7 +1004,7 @@ $(document).on('click', '.btnconnect', function()
 {
 	var url = $(this).attr('data-tgt');
 	var page = $(this).attr('data-pg');
-	  
+
 	var memberid = $(this).attr('data-i') ; 
 	var form = $('<form action="' + siteurl + 'business/search" method="post">' +
         '<input type="hidden" name="partnerid" value="' + memberid + '" />' +

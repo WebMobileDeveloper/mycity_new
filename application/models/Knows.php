@@ -492,189 +492,142 @@ class Knows extends CI_Model
 
     public function search_nearest($data)
     {
-        $keyword = $data['keyword'];
-        $city = $data['city'];
-        $vocation = $data['vocation'];
-        $userid = $data['userid'];
-        $start = $data['offset'];
-        $start2 = $data['offset2'];
-        $iszip = $data['iszip'];
-        $utype = $data['utype'];
-        $where_member_ids = array();
+        $keyword = $data['bs_search_key'];
+        $city = $data['bs_search_city'];
+        $vocation = $data['bs_search_vocation'];
+        $userid = $data['bs_search_userid'];
+        $page = $data['bs_search_offset'];
+        $iszip = $data['bs_search_iszip'];
+        $utype = $data['bs_search_usertype'];
+        $memberids = $data['bs_search_searched_members'];
         $pagesize = 10;
+        $start = $page * $pagesize;
+        $jsonresult = array();
 
-        if ($city == "") {
-            $where_city = '';
-            $knowwhere_city = '';
-        } else {
-            if ($iszip == 1) {
-                $neighbours = findneighbours($this, $city, '30');
-                if (sizeof($neighbours) > 0) {
-                    $neighbourzips = implode(",", $neighbours);
-                    $where_city = "   zip in  (  " . $neighbourzips . "  )  and ";
-                    $knowwhere_city = "   client_zip in  (  " . $neighbourzips . "  )  and ";
+        if ($utype == 1) {
+
+            if ($city == "") {
+                $where_city = '';
+            } else {
+                if ($iszip == 1) {
+                    $neighbours = findneighbours($this, $city, '30');
+                    if (sizeof($neighbours) > 0) {
+                        $neighbourzips = implode(",", $neighbours);
+                        $where_city = "   zip in  (  " . $neighbourzips . "  )  and ";
+                    } else {
+                        $where_city = "  zip ='" . $city . "' and ";
+                    }
                 } else {
-                    $where_city = "  zip ='" . $city . "' and ";
-                    $knowwhere_city = " client_zip ='" . $city . "' and ";
-                }
-            } else {
-                $cities = explode(",", $city);
-                $where_city = " ( FIND_IN_SET('" . implode("',  cities ) OR FIND_IN_SET('", $cities) . "',  city ) )  and";
-                $knowwhere_city = " ( FIND_IN_SET('" . implode("',  client_location ) OR FIND_IN_SET('", $cities) . "',  client_location ) )  and";
-            }
-        }
-
-        if ($vocation != '') {
-            $keys = explode(",", $vocation);
-            $where_vocations = " or ( FIND_IN_SET('" . implode("',  vocations ) OR FIND_IN_SET('", $keys) . "',  vocations ) ) ";
-            $knowwhere_vocations = " and ( FIND_IN_SET('" . implode("',  client_profession ) OR FIND_IN_SET('", $keys) . "',  client_profession ) ) ";
-        } else if ($keyword != '') {
-            $keys = explode(",", $keyword);
-            $where_vocations = " or ( FIND_IN_SET('" . implode("',  vocations ) OR FIND_IN_SET('", $keys) . "',  vocations ) ) ";
-            $knowwhere_vocations = " and ( FIND_IN_SET('" . implode("',  client_profession ) OR FIND_IN_SET('", $keys) . "',  client_profession ) ) ";
-        }
-
-        if ($keyword == '' && $city == '' && $vocation == '') {
-            $jsonresult = array('error' => '10', 'errmsg' => 'Search parameter missing!');
-            $response->getBody()->write(json_encode($jsonresult));
-            return $response;
-        }
-
-        $sql_query_ids = " select a.id as ui from mc_user as a inner join  user_details  as b on a.id=b.user_id  where $where_city a.id <> '1' and a.id <> '$userid' and ( a.username like '%$keyword%'  $where_vocations )   ";
-        $member_ids = $this->db->query($sql_query_ids);
-        if ($member_ids->num_rows() > 0) {
-            $ids = array();
-            foreach ($member_ids->result() as $row) {
-                $where_member_ids[] = $row->ui;
-            }
-        }
-        $sql_query = "select a.id as ui, 0 knid  , user_email as a, username  as b, user_role  as c, user_pkg  as d, user_phone  as e,  image  as f,  busi_name  as g,  user_type  as h, " .
-            " busi_location_street  as i,  busi_location  as j,  busi_type  as k,  busi_hours  as l, busi_website  as m, current_company  as n, linkedin_profile  as o, " .
-            " street  as p, city  as q, zip  as r, country  as s,  groups  as t,  target_clients  as u, target_referral_partners  as v, vocations  as w, about_your_self  as x , user_shortcode, " .
-            " 0 as isconnected, 0 as rating from mc_user as a inner join  user_details  as b on a.id=b.user_id  " .
-            " where $where_city a.id <> '1' and a.id <> '$userid' and ( a.username like '%$keyword%'  $where_vocations )  order by username  limit $start, $pagesize ";
-        $sql_query1 = $sql_query;
-
-        $sql_query_count = "select count(*) as reccnt from mc_user as a inner join  user_details  as b on a.id=b.user_id  " .
-            " where $where_city a.id <> '1' and a.id <> '$userid' and ( a.username like '%$keyword%'  $where_vocations ) ";
-
-        $members = $this->db->query($sql_query);
-        $membercount = $members->num_rows();
-        if ($membercount > 0) {
-            foreach ($members->result() as $item) {
-                $sp = $item->ui;
-                $query_connect_check = "select * from mc_member_connections where  status='1' and (  ( firstpartner='$userid' and secondpartner='$sp')  or ( firstpartner='$sp' and secondpartner='$userid') ) ";
-
-                $rstconcheck = $this->db->query($query_connect_check);
-                if ($rstconcheck->num_rows() > 0) {
-
-                    $item->isconnected = '1';
-                }
-                //calculating average rating
-                $query_avg_rating = "select sum(ranking) as ranking from mc_user_rating where  user_id='$sp' group by rated_by ";
-                $avgraters = $this->db->query($query_avg_rating);
-                if ($avgraters->num_rows() > 0) {
-                    $avgrate = 0;
-                    $count = 0;
-                    foreach ($avgraters->result() as $ritem) {
-                        $avgrate += $ritem->ranking;
-                        $count++;
-                    }
-                    if ($count > 0)
-                        $item->rating = $avgrate / $count;
+                    $cities = explode(",", $city);
+                    $where_city = " ( FIND_IN_SET('" . implode("',  cities ) OR FIND_IN_SET('", $cities) . "',  city ) )  and";
                 }
             }
+            if ($vocation != '') {
+                $keys = explode(",", $vocation);
+                $where_vocations = " or ( FIND_IN_SET('" . implode("',  vocations ) OR FIND_IN_SET('", $keys) . "',  vocations ) ) ";
+            } else if ($keyword != '') {
+                $keys = explode(",", $keyword);
+                $where_vocations = " or ( FIND_IN_SET('" . implode("',  vocations ) OR FIND_IN_SET('", $keys) . "',  vocations ) ) ";
+            }
+            if ($keyword == '' && $city == '' && $vocation == '') {
+                $jsonresult = array('error' => '10', 'errmsg' => 'Search parameter missing!');
+                return $jsonresult;
+            }
 
-            //loggin search keyword
-            //$memberrating = usort($members, memberrating );
+            $sql_query = "select a.id as ui, 0 knid  , user_email as a, username  as b, user_role  as c, user_pkg  as d, user_phone  as e,  image  as f,  busi_name  as g,  user_type  as h, " .
+                " busi_location_street  as i,  busi_location  as j,  busi_type  as k,  busi_hours  as l, busi_website  as m, current_company  as n, linkedin_profile  as o, " .
+                " street  as p, city  as q, zip  as r, country  as s,  groups  as t,  target_clients  as u, target_referral_partners  as v, vocations  as w, about_your_self  as x , user_shortcode, " .
+                " 0 as isconnected,  r.rating as rating from mc_user as a 
+            left join (select user_id, sum(ranking)/count(DISTINCT(rated_by)) as rating from mc_user_rating  group by user_id) as r on a.id = r.user_id
+            inner join  user_details  as b on a.id=b.user_id  " .
+                " where $where_city a.id <> '1' and a.id <> '$userid' and ( a.username like '%$keyword%'  $where_vocations )  
+            order by rating desc, username  limit $start, $pagesize ";
+//            echo $sql_query;
+//            exit();
+            $sql_query_count = "select count(*) as reccnt from mc_user as a inner join  user_details  as b on a.id=b.user_id  " .
+                " where $where_city a.id <> '1' and a.id <> '$userid' and ( a.username like '%$keyword%'  $where_vocations ) ";
+
             $result_count = $this->db->query($sql_query_count);
-            $pages = $result_count->row()->reccnt;
-            $jsonresult = array('pages' => $pages, 'result' => $members, 'msg1' => 'Member fetched successfully!');
-        }
+            $membercount = $result_count->row()->reccnt;
+            $jsonresult['member_count'] = $membercount;
+            $jsonresult['msg1'] = 'Matching members not found!';
+            $jsonresult['result'] = '';
 
-        $membername = '';
-        if ($membercount == 0) {
-            $jsonresult = array('pages' => '0', 'result' => '', 'msg1' => 'No matching members found!');
-            $rsnameorvoc = $this->db->query("SELECT * FROM  groups  where islisted='1' and grp_name='$keyword' ORDER BY  grp_name ");
-            if ($rsnameorvoc->num_rows() == 0) {
-                $membername = " and client_name like '%$keyword%' ";
-            } else {
-                $membername = " and find_in_set('$keyword', client_profession) ";
-            }
-        } else {
-            $membername = " and find_in_set('$keyword', client_profession) ";
-        }
+            $memberids = array();
+            if ($membercount > 0) {
+                $members = $this->db->query($sql_query);
+                foreach ($members->result() as &$item) {
+                    $sp = $item->ui;
+                    $memberids[] = $sp;
+                    $query_connect_check = "select * from mc_member_connections where  status='1' and (  ( firstpartner='$userid' and secondpartner='$sp')  or ( firstpartner='$sp' and secondpartner='$userid') ) ";
 
-        //fetching knows
-        if (sizeof($where_member_ids) > 0) {
-            $where_memids = " k.user_id in ( " . implode(',', $where_member_ids) . " ) ";
-            $where_memids_cnt = "  k.user_id in ( " . implode(',', $where_member_ids) . " ) ";
-            $sql_query = " select  k.user_id  as ui, k.id as knid , u.username as un, k.client_email as a  ,  k.client_name as b , 
-			'na' c, 'na' d,  k.client_phone as e, 'na' f, 
-			'na' g, 'na' h, 'na' i, 'na' j,  'na' k, 'na' l,  'na' m, 'na' n, 
-			'na' o, 'na'  p,  k.client_location as q,  k.client_zip as r, 'na'  s, 
-			'na' t, 'na'  u, 'na'  v, k.client_profession as w, 'na'  x , 
-			0 as isconnected, t2.rating , 0 as requestsent, 0 as ismember_connected, 0 as mem_id, 'no-photo.png' as mem_photo  
-			from  user_people as k inner join mc_user as u on k.user_id=u.id  
-			inner join 
-			( select user_id, sum(ranking) as rating from  user_rating  group by user_id ) as t2  
-			on k.id = t2.user_id 
-			where $where_memids ";
-            $sql_query_count = "select count(*) as reccnt 
-			from  user_people as k inner join mc_user as u on k.user_id=u.id  
-			inner join 
-			( select user_id, sum(ranking) as rating from  user_rating  group by user_id ) as t2  
-			on k.id = t2.user_id 
-			where $where_memids_cnt ";
-            $rst_count = $this->db->query($sql_query_count);
-            $pages = $rst_count->row()->reccnt;
-            $jsonresult['know_pages'] = $pages;
-            $rst = $this->db->query($sql_query);
-            $i = 0;
-            $know_result = array();
-            if ($rst->num_rows() > 0) {
-
-                foreach ($rst->result_array() as $knows) {
-                    $invitecount = $this->db->query("select count(*) as tcnt from mc_claimprofile_invite 
-					where user_id=" . $knows['knid'] . " and member_id='" . $this->session->id . "' ");
-                    $knows['requestsent'] = $invitecount->row()->tcnt;
-
-                    $ismemberrow = $this->db->query("select * from mc_user where user_email='" . $knows['a'] . "'");
-
-                    if ($ismemberrow->num_rows() > 0) {
-                        $member_profile = $ismemberrow->row();
-                        $knows['mem_id'] = $member_profile->id;
-                        $knows['mem_photo'] = $member_profile->image;
-                        $query_connect_check = "select * from mc_member_connections where 
-						status='1' and (  ( firstpartner='" . $knows['mem_id'] . "' and secondpartner='$userid')  
-						or ( firstpartner='$userid' and secondpartner='" . $knows['mem_id'] . "') ) ";
-
-                        $rstconcheck = $this->db->query($query_connect_check);
-                        if ($rstconcheck->num_rows() > 0) {
-                            $knows['ismember_connected'] = 10;
-                        } else {
-                            $knows['ismember_connected'] = 1;
-                        }
+                    $rstconcheck = $this->db->query($query_connect_check);
+                    if ($rstconcheck->num_rows() > 0) {
+                        $item->isconnected = '1';
                     }
-                    $know_result[] = $knows;
-                    $i++;
                 }
-
-                usort($know_result, array($this, 'ranking_sort'));
-
-                //$memberrating = usort($knows, memberrating );
-                $jsonresult['knows'] = $know_result;
-                $jsonresult['msg2'] = 'Matching knows found!';
-            } else {
-                $jsonresult['msg2'] = 'Matching knows not found!';
-                $jsonresult['knows'] = '';
+                $jsonresult['msg1'] = 'Member fetched successfully!';
+                $jsonresult['result'] = $members;
             }
+            $memberids = implode(",", $memberids);
+            $jsonresult['memberids'] = $memberids;
         } else {
+            //fetching knows
             $jsonresult['msg2'] = 'Matching knows not found!';
             $jsonresult['knows'] = '';
+            $jsonresult['know_count'] = 0;
+            if ($memberids != '') {
+                $wherememberid = " user_id  in ( " . $memberids . ") ";
+                $sql_query = "select  r.rating, k.user_id  as ui, k.id as knid , u.username as un, k.client_email as a  ,  k.client_name as b , 
+			          'na' c, 'na' d,  k.client_phone as e, 'na' f, 
+			          'na' g, 'na' h, 'na' i, 'na' j,  'na' k, 'na' l,  'na' m, 'na' n, 
+			          'na' o, 'na'  p,  k.client_location as q,  k.client_zip as r, 'na'  s, 
+			          'na' t, 'na'  u, 'na'  v, k.client_profession as w, 'na'  x ,  0 as isconnected, 
+			          0 as requestsent, 0 as ismember_connected, 0 as mem_id, 'no-photo.png' as mem_photo  
+			          from  user_people as k 
+                      inner join mc_user as u on k.user_id=u.id  
+			          left join (select user_id as r_user_id, sum(ranking) as rating from user_rating  group by user_id) as r on k.id = r_user_id
+			          where $wherememberid order by rating desc limit $start, $pagesize ";
+
+                $sql_query_count = "select count(*) as reccnt from  user_people  where $wherememberid  ";
+
+                $rst_count = $this->db->query($sql_query_count)->row()->reccnt;
+                $jsonresult['know_count'] = $rst_count;
+
+                $know_result = array();
+                if ($rst_count > 0) {
+                    $rst = $this->db->query($sql_query);
+                    foreach ($rst->result() as &$knows) {
+                        $invitecount = $this->db->query("select count(*) as tcnt from mc_claimprofile_invite 
+					    where user_id=" . $knows->knid . " and member_id='" . $this->session->id . "' ");
+                        $knows->requestsent = $invitecount->row()->tcnt;
+
+                        $ismemberrow = $this->db->query("select * from mc_user where user_email='" . $knows->a . "'");
+
+                        if ($ismemberrow->num_rows() > 0) {
+                            $member_profile = $ismemberrow->row();
+                            $knows->mem_id = $member_profile->id;
+                            $knows->mem_photo = $member_profile->image;
+                            $query_connect_check = "select * from mc_member_connections 
+                            where status='1' and (  ( firstpartner='" . $knows->mem_id . "' and secondpartner='$userid')  
+						                     or ( firstpartner='$userid' and secondpartner='" . $knows->mem_id . "') ) ";
+
+                            $rstconcheck = $this->db->query($query_connect_check);
+                            if ($rstconcheck->num_rows() > 0) {
+                                $knows->ismember_connected = 10;
+                            } else {
+                                $knows->ismember_connected = 1;
+                            }
+                        }
+                        $know_result[] = $knows;
+                    }
+                    $jsonresult['knows'] = $know_result;
+                    $jsonresult['msg2'] = 'Matching knows found!';
+                }
+            }
         }
 
-        $jsonresult['errmsg'] = $sql_query . 'Member fetched successfully!';
+        $jsonresult['errmsg'] = 'Member fetched successfully!';
         $jsonresult['error'] = '0';
         return $jsonresult;
     }
